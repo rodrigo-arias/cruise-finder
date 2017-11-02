@@ -1,4 +1,6 @@
-package cruisefind;
+package ciudad;
+
+import ciudad.ListaCiudad;
 
 public class NodoCiudad {
 

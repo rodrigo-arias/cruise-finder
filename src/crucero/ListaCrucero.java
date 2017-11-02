@@ -1,4 +1,6 @@
-package cruisefind;
+package crucero;
+
+import crucero.IListaCrucero;
 
 public class ListaCrucero implements IListaCrucero {
 

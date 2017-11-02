@@ -1,4 +1,6 @@
-package cruisefind;
+package ciudad;
+
+import cruisefind.Retorno;
 
 public class ListaCiudad implements IListaCiudad {
 
@@ -51,6 +53,7 @@ public class ListaCiudad implements IListaCiudad {
      */
     //PRE:
     //POS: Retorna true si la lista no tiene nodos
+    @Override
     public boolean esVacia() {
         if (this.inicio == null) {
             return true;
@@ -61,6 +64,7 @@ public class ListaCiudad implements IListaCiudad {
 
     //PRE:
     //POS: Agrega un nuevo Nodo al principio de la lista
+    @Override
     public Retorno.Resultado agregarInicio(String ciudad) {
 
         //falta implementar buscar ciudad
@@ -100,6 +104,10 @@ public class ListaCiudad implements IListaCiudad {
 
     //PRE:
     //POS: Borra el primer nodo
+    /**
+     *
+     */
+    @Override
     public void borrarInicio() {
         // implementar el metodo
         if (this.esVacia()) {
@@ -110,6 +118,10 @@ public class ListaCiudad implements IListaCiudad {
 
     //PRE:
     //POS: Borra el último nodo
+    /**
+     *
+     */
+    @Override
     public void borrarFin() {
         // implementar el metodo
 
@@ -117,12 +129,14 @@ public class ListaCiudad implements IListaCiudad {
 
     //PRE:
     //POS: elimina todos los nodos de una lista dada
+    @Override
     public void vaciar() {
         // implementar el metodo
     }
 
     //PRE:
     //POS: Recorre y muestra los datos de lista
+    @Override
     public void mostrar() {
         // implementar el metodo
         NodoCiudad aux = this.inicio;

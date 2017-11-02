@@ -1,13 +1,15 @@
-package cruisefind;
+package ciudad;
 
-public interface IListaCrucero {
+import cruisefind.Retorno;
+
+public interface IListaCiudad {
 
     //metodos de la interfaz
     public boolean esVacia();
 
-    public void agregarInicio(int n);
+    public Retorno.Resultado agregarInicio(String ciudad);
 
-    public void agregarFinal(int n);
+    public void agregarFinal(String Ciudad);
 
     public void borrarInicio();
 

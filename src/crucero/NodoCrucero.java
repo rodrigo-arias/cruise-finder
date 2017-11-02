@@ -1,4 +1,4 @@
-package cruisefind;
+package crucero;
 
 public class NodoCrucero {
 
