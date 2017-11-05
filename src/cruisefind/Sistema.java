@@ -5,26 +5,31 @@ import cruisefind.Retorno.Resultado;
 
 public class Sistema implements ISistema {
 
-    //inicialice list
+    //inicialización de lista de ciudades
     private ListaCiudad lciudad;
 
-    //PRE: cantCiudades >= 0;
+    //Pre: cantCiudades >= 0;
+    //Post:
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
 
-        lciudad = new ListaCiudad();
-        lciudad.setCapacidad(cantCiudades);
-
         Retorno ret = new Retorno();
+        lciudad = new ListaCiudad();
 
-        ret.resultado = Resultado.OK;
-
+        if (cantCiudades >= 0) {
+            lciudad.setCantMaxima(cantCiudades);
+            ret.resultado = Resultado.OK;
+        } else {
+            ret.resultado = Resultado.ERROR_1;
+        }
         return ret;
     }
 
     @Override
     public Retorno destruirSistemaReservas() {
         Retorno ret = new Retorno();
+
+        System.gc();
 
         ret.resultado = Resultado.NO_IMPLEMENTADA;
 

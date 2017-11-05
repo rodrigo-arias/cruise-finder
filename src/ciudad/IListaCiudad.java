@@ -4,7 +4,6 @@ import cruisefind.Retorno;
 
 public interface IListaCiudad {
 
-    //metodos de la interfaz
     public boolean esVacia();
 
     public Retorno.Resultado agregarInicio(String ciudad);
