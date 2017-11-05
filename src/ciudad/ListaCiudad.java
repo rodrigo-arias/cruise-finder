@@ -104,9 +104,6 @@ public class ListaCiudad implements IListaCiudad {
 
     //PRE:
     //POS: Borra el primer nodo
-    /**
-     *
-     */
     @Override
     public void borrarInicio() {
         // implementar el metodo

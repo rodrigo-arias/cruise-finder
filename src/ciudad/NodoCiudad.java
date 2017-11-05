@@ -1,7 +1,5 @@
 package ciudad;
 
-import ciudad.ListaCiudad;
-
 public class NodoCiudad {
 
     private int dato;

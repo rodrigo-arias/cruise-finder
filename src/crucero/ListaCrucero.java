@@ -1,7 +1,5 @@
 package crucero;
 
-import crucero.IListaCrucero;
-
 public class ListaCrucero implements IListaCrucero {
 
     private NodoCrucero inicio;
@@ -118,6 +116,7 @@ public class ListaCrucero implements IListaCrucero {
         return resultado;
     }
 
+    //---------------------------------------------------------------------
     /**
      * *** para resolver en forma recursiva Métodos RECURSIVOS ****
      */
