@@ -125,7 +125,7 @@ public class ListaCiudad implements IListaCiudad {
     }
 
     //Pre:
-    //Pos: elimina todos los nodos de una lista dada
+    //Pos: Elimina todos los nodos de una lista dada
     @Override
     public void vaciar() {
         // implementar el metodo

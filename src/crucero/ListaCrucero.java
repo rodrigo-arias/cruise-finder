@@ -2,38 +2,40 @@ package crucero;
 
 public class ListaCrucero implements IListaCrucero {
 
+    public ListaCrucero() {
+        this.inicio = inicio;
+        this.fin = fin;
+    }
+
     private NodoCrucero inicio;
     private NodoCrucero fin;
 
-    //Constructor
     public void Lista() {
         this.inicio = null;
         this.fin = null;
     }
 
-    //Inicio
-    public void setInicio(NodoCrucero i) {
-        inicio = i;
-    }
-
+    //-------------------------------------------------------------------
     public NodoCrucero getInicio() {
         return inicio;
     }
 
-    //Fin
-    public void setFin(NodoCrucero f) {
-        fin = f;
+    public void setInicio(NodoCrucero i) {
+        inicio = i;
     }
 
     public NodoCrucero getFin() {
         return fin;
     }
 
-    /**
-     * ***Métodos Básicos****
-     */
-    //PRE:
-    //POS: Retorna true si la lista no tiene nodos
+    public void setFin(NodoCrucero f) {
+        fin = f;
+    }
+
+    //-------------------------------------------------------------------
+    //Pre:
+    //Pos: Retorna true si la lista no tiene nodos
+    @Override
     public boolean esVacia() {
         if (this.inicio == null) {
             return true;
@@ -42,65 +44,69 @@ public class ListaCrucero implements IListaCrucero {
         }
     }
 
-    //PRE:
-    //POS: Agrega un nuevo Nodo al principio de la lista
+    //Pre:
+    //Pos: Agrega un nuevo Nodo al principio de la lista
+    @Override
     public void agregarInicio(int n) {
         //implementar el metodo
 
     }
 
-    //PRE:
-    //POS: Agrega un nuevo Nodo al final de la lista
+    //Pre:
+    //Pos: Agrega un nuevo Nodo al final de la lista
+    @Override
     public void agregarFinal(int n) {
         // implementar el metodo
 
     }
 
-    //PRE:
-    //POS: Borra el primer nodo
+    //Pre:
+    //Pos: Borra el primer nodo
+    @Override
     public void borrarInicio() {
         // implementar el metodo
 
     }
 
-    //PRE:
-    //POS: Borra el último nodo
+    //Pre:
+    //Pos: Borra el último nodo
+    @Override
     public void borrarFin() {
         // implementar el metodo
 
     }
 
-    //PRE:
-    //POS: elimina todos los nodos de una lista dada
+    //Pre:
+    //Pos: elimina todos los nodos de una lista dada
+    @Override
     public void vaciar() {
         // implementar el metodo
     }
 
-    //PRE:
-    //POS: Recorre y muestra los datos de lista
+    //Pre:
+    //Pos: Recorre y muestra los datos de lista
+    @Override
     public void mostrar() {
         // implementar el metodo
 
     }
 
-    /**
-     * ***Otros Métodos (iterativos)****
-     */
-    //PRE: lista ordenada => mantiena orden
-    //POS: inserta nuevo elemento en orden ascendente
+    //-------------------------------------------------------------------
+    //Pre: lista ordenada => mantiena orden
+    //Pos: inserta nuevo elemento en orden ascendente
     public void agregarOrd(int n) {
         // implementar el metodo
 
     }
 
-    //PRE: lista ordenada
-    //POS: Borra la primer ocurrencia de un elemento dado
+    //Pre: lista ordenada
+    //Pos: Borra la primer ocurrencia de un elemento dado
     public void borrarElemento(int n) {
         // implementar el metodo
     }
 
-    //PRE:
-    //POS: Retorna la cantidad de nodos que tiene la lista
+    //Pre:
+    //Pos: Retorna la cantidad de nodos que tiene la lista
     public int cantElementos() {
         int resultado = 0;
         // implementar el metodo
@@ -108,7 +114,7 @@ public class ListaCrucero implements IListaCrucero {
         return resultado;
     }
 
-    //PRE: //POS:
+    //Pre: //Pos:
     public NodoCrucero obtenerElemento(int n) {
         NodoCrucero resultado = null;
         // implementar el metodo
@@ -116,26 +122,22 @@ public class ListaCrucero implements IListaCrucero {
         return resultado;
     }
 
-    //---------------------------------------------------------------------
-    /**
-     * *** para resolver en forma recursiva Métodos RECURSIVOS ****
-     */
-    //PRE:
-    //POS: muestra los datos de la lista en orden de enlace
+    //Pre:
+    //Pos: muestra los datos de la lista en orden de enlace
     public void mostrarREC(NodoCrucero l) {
         // implementar el metodo
 
     }
 
-    //PRE:
-    //POS: muestra los datos de la lista en orden inverso
+    //Pre:
+    //Pos: muestra los datos de la lista en orden inverso
     public void mostrarInversoREC(NodoCrucero l) {
         // implementar el metodo
 
     }
 
-    //PRE:
-    //POS: retorna true si el elemento pertenece a la lista
+    //Pre:
+    //Pos: retorna true si el elemento pertenece a la lista
     public boolean existeDatoREC(NodoCrucero l, int n) {
         boolean resultado = false;
         // implementar el metodo

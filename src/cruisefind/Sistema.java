@@ -8,8 +8,8 @@ public class Sistema implements ISistema {
     //inicialización de lista de ciudades
     private ListaCiudad lciudad;
 
-    //Pre: cantCiudades >= 0;
-    //Post:
+    //Pre: La cantidad de ciudades debe ser >= 0;
+    //Post: Setea la cantidad de ciudades que se pueden ingresar
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
 
@@ -25,32 +25,57 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+    //Pre:
+    //Post: Se destruyen la lista ciudades
     @Override
     public Retorno destruirSistemaReservas() {
+
         Retorno ret = new Retorno();
 
+        lciudad = null;
         System.gc();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        ret.resultado = Resultado.OK;
 
         return ret;
     }
 
+    //Pre:
+    //Post: Agrega la ciudad al inicio de la lista de ciudades
     @Override
     public Retorno registrarCiudad(String ciudad) {
 
         Retorno ret = new Retorno();
-
         ret.resultado = lciudad.agregarInicio(ciudad);
 
         return ret;
     }
 
+    //Pre:
+    //Post: Agrega el crucero al inicio de la lista de cruceros de la ciudad y
+    //con raking 0 en el sistema de reservas
     @Override
     public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        if (estrellas < 1 || estrellas > 5) {
+
+            ret.resultado = Resultado.ERROR_1;
+
+        } else if (capacidad < 0) {
+
+            ret.resultado = Resultado.ERROR_2;
+
+//        }   else if (!lciudad.buscarCrucero(ciudad, nombre)) {
+//
+//            ret.resultado = Resultado.ERROR_4;
+        } else if (!lciudad.buscarCiudad(ciudad)) {
+
+            ret.resultado = Resultado.ERROR_4;
+
+        } else {
+            ret.resultado = Resultado.OK;
+        }
 
         return ret;
     }

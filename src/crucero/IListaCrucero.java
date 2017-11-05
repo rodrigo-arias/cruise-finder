@@ -2,7 +2,6 @@ package crucero;
 
 public interface IListaCrucero {
 
-    //metodos de la interfaz
     public boolean esVacia();
 
     public void agregarInicio(int n);
