@@ -4,30 +4,30 @@ public class CruiseFind {
 
     public static void main(String[] args) {
 
-        //debe recibir la cantidad de ciudades según la letra / Sistema s = new Sistema(7);
+        //declaración global
         Sistema s = new Sistema();
         Prueba p = new Prueba();
 
-        s.crearSistemaReservas(5);
+        //llamada a pruebas
+        Prueba11_crearSistemaReservas(s, p);
 
-        Prueba1(s, p);
-        //Prueba2(s, p);
-
+        //Prueba13_registrarCiudad(s, p);
     }
 
-    public static void Prueba1(Sistema s, Prueba p) {
+    //declaración de pruebas
+    public static void Prueba11_crearSistemaReservas(Sistema s, Prueba p) {
 
-        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresó Montevideo");
-        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas.");
         p.imprimirResultadosPrueba();
 
     }
 
-    public static void Prueba2(Sistema s, Prueba p) {
+    public static void Prueba13_registrarCiudad(Sistema s, Prueba p) {
 
-        p.ver(s.registrarCiudad("Maldonado").resultado, Retorno.Resultado.OK, "Se ingresó Maldonado");
-        p.ver(s.registrarCiudad("Rocha").resultado, Retorno.Resultado.OK, "Se ingresó Rocha");
-        p.ver(s.registrarCiudad("Punta del Este").resultado, Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCiudad("Rocha"), Retorno.Resultado.OK, "Se ingresó Rocha");
+        p.ver(s.registrarCiudad("Punta del Este"), Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.ERROR_1, "Montevideo ya existe");
         p.imprimirResultadosPrueba();
 
     }

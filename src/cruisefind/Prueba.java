@@ -10,18 +10,18 @@ public class Prueba {
         cantCorrectas = cantIncorrectas = cantNoImplementadas = 0;
     }
 
-    public void ver(Retorno.Resultado tr, Retorno.Resultado RetornoEsperado, String comentario) {
+    public void ver(Retorno tr, Retorno.Resultado RetornoEsperado, String comentario) {
         System.out.println("----------------------------- Testeo --------------------------------");
         imprimirComentario(comentario);
-        imprimirRetorno(tr, RetornoEsperado);
+        imprimirRetorno(tr.resultado, RetornoEsperado);
         System.out.println("");
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
 
-        if (tr.equals(RetornoEsperado)) {
+        if (tr.resultado.equals(RetornoEsperado)) {
             cantCorrectas++;
         } else {
-            if (tr.equals(Retorno.Resultado.NO_IMPLEMENTADA)) {
+            if (tr.resultado.equals(Retorno.Resultado.NO_IMPLEMENTADA)) {
                 cantNoImplementadas++;
             } else {
                 cantIncorrectas++;
