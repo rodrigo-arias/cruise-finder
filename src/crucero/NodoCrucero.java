@@ -2,7 +2,7 @@ package crucero;
 
 public class NodoCrucero {
 
-    //Comentario de prueba 2
+    
     public NodoCrucero(int dato, String nombre, String ciudad, int capacidad, int estrellas, NodoCrucero sig) {
         this.dato = dato;
         this.nombre = nombre;
