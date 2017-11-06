@@ -2,37 +2,24 @@ package crucero;
 
 public class NodoCrucero {
 
-    private int dato;
     private String nombre;
     private String ciudad;
     private int capacidad;
     private int estrellas;
+    //private ListaServicios lservicios;
     private NodoCrucero sig;
 
-    public NodoCrucero(int dato, String nombre, String ciudad, int capacidad, int estrellas, NodoCrucero sig) {
-        this.dato = dato;
+    public NodoCrucero(String nombre, String ciudad, int capacidad, int estrellas) {
         this.ciudad = ciudad;
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.estrellas = estrellas;
         //this.lservicios = new ListaServicios();
-        this.sig = sig;
-    }
-
-    public NodoCrucero(int n) {
-        this.dato = n;
         this.sig = null;
     }
 
-    //-------------------------------------------------------------------
-    public int getDato() {
-        return dato;
-    }
-
-    public void setDato(int dato) {
-        this.dato = dato;
-    }
-
+    //==================================================//
+    //==================  Properties  ==================//
     public String getNombre() {
         return nombre;
     }

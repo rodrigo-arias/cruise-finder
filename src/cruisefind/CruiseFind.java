@@ -56,6 +56,5 @@ public class CruiseFind {
         p.ver(s.registrarCrucero("Rocha", "Royal Caribbean Int.", 5, -1), Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
         p.ver(s.registrarCrucero("Piriapolis", "Disney Cruise Line", 5, 2200), Retorno.Resultado.ERROR_4, "La ciudad no existe");
         p.imprimirResultadosPrueba();
-
     }
 }

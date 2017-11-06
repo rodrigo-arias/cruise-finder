@@ -8,7 +8,7 @@ public interface IListaCiudad {
 
     public Retorno.Resultado agregarInicio(String ciudad);
 
-    public void agregarFinal(String Ciudad);
+    public Retorno.Resultado agregarFinal(String Ciudad);
 
     public void borrarInicio();
 
@@ -17,11 +17,4 @@ public interface IListaCiudad {
     public void vaciar();
 
     public void mostrar();
-
-    //otros metodos para analizar
-//    public void agregarOrd(int n);
-//    public void borrarElemento(int n);
-//    public int cantElementos();
-//    public NodoLista obtenerElemento(int n);
-//    public void mostrarREC(NodoLista l);
 }

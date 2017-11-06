@@ -4,24 +4,20 @@ import cruisefind.Retorno;
 
 public class ListaCiudad implements IListaCiudad {
 
-    public ListaCiudad() {
-        this.inicio = inicio;
-        this.fin = fin;
-        this.cantMaxima = 0;
-        this.cantElementos = 0;
-    }
-
     private NodoCiudad inicio;
     private NodoCiudad fin;
     private int cantMaxima;
     private int cantElementos;
 
-    public void Lista() {
+    public ListaCiudad() {
         this.inicio = null;
         this.fin = null;
+        this.cantMaxima = 0;
+        this.cantElementos = 0;
     }
 
-    //-------------------------------------------------------------------
+    //==================================================//
+    //==================  Properties  ==================//
     public NodoCiudad getInicio() {
         return inicio;
     }
@@ -54,16 +50,13 @@ public class ListaCiudad implements IListaCiudad {
         this.cantElementos = cantElementos;
     }
 
-    //-------------------------------------------------------------------
+    //==================================================//
+    //================  Métodos Básicos  ===============//
     //Pre:
     //Post: Retorna true si la lista no tiene nodos
     @Override
     public boolean esVacia() {
-        if (this.inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.inicio == null;
     }
 
     //Pre:
@@ -71,22 +64,22 @@ public class ListaCiudad implements IListaCiudad {
     @Override
     public Retorno.Resultado agregarInicio(String ciudad) {
 
-        //falta implementar buscar ciudad / implementar el metodo
         if (cantElementos < cantMaxima || cantMaxima == 0) {
 
             if (!this.buscarCiudad(ciudad)) {
 
-                //creo el nuevo nodo
+                //Creo el nuevo nodo y le asigno el siguiente
                 NodoCiudad nuevo = new NodoCiudad(ciudad);
-
-                //para que es????
                 nuevo.setSig(inicio);
-                this.inicio = nuevo;
 
-                //sumo uno a la cantidad de elementos
+                //Asigno el nuevo elemento al inicio y sumo la cantidad
+                this.inicio = nuevo;
                 this.cantElementos++;
 
-                //falta igualar siguiente con fin cuando es un elemento
+                //Primera inserción
+                if (this.fin == null) {
+                    this.fin = nuevo;
+                }
                 return Retorno.Resultado.OK;
             } else {
                 return Retorno.Resultado.ERROR_1;
@@ -101,16 +94,47 @@ public class ListaCiudad implements IListaCiudad {
     //Pre:
     //Pos: Agrega un nuevo Nodo al final de la lista
     @Override
-    public void agregarFinal(String Ciudad) {
-        // implementar el metodo
+    public Retorno.Resultado agregarFinal(String ciudad) {
 
+        if (cantElementos < cantMaxima || cantMaxima == 0) {
+
+            if (!this.buscarCiudad(ciudad)) {
+
+                if (this.esVacia()) {
+                    this.agregarInicio(ciudad);
+                } else {
+
+                    NodoCiudad aux = this.inicio;
+
+                    //Identifico el último elemento
+                    while (aux.getSig() != null) {
+                        aux = aux.getSig();
+                    }
+
+                    //Creo el nuevo nodo y le asigno el siguiente al que estaba al final
+                    NodoCiudad nuevo = new NodoCiudad(ciudad);
+                    aux.setSig(nuevo);
+
+                    //Asigno el nuevo elemento al final y sumo la cantidad
+                    this.fin = nuevo;
+                    this.cantElementos++;
+                }
+
+                return Retorno.Resultado.OK;
+            } else {
+                return Retorno.Resultado.ERROR_1;
+
+            }
+
+        } else {
+            return Retorno.Resultado.ERROR_2;
+        }
     }
 
     //Pre:
     //Pos: Borra el primer nodo
     @Override
     public void borrarInicio() {
-        // implementar el metodo
         if (this.esVacia()) {
             this.inicio = this.inicio.getSig();
         }
@@ -121,31 +145,53 @@ public class ListaCiudad implements IListaCiudad {
     //Pos: Borra el último nodo
     @Override
     public void borrarFin() {
-        // implementar el metodo
+        if (!this.esVacia()) {
+            if (this.inicio == this.fin) {
+                this.borrarInicio();
+            } else {
+                NodoCiudad aux = this.inicio;
+                while (aux.getSig().getSig() != null) {
+                    aux = aux.getSig();
+                }
+                this.fin = aux;
+                this.fin.setSig(null);
+            }
+        }
     }
 
     //Pre:
     //Pos: Elimina todos los nodos de una lista dada
     @Override
     public void vaciar() {
-        // implementar el metodo
+        while (inicio != null) {
+            borrarInicio();
+        }
     }
 
     //Pre:
     //Pos: Recorre y muestra los datos de lista
     @Override
     public void mostrar() {
-        // implementar el metodo
-        NodoCiudad aux = this.inicio;
+        if (this.esVacia()) {
+            System.out.println("La lista es vacía");
+        } else {
+            NodoCiudad aux = this.inicio;
 
-        while (aux != null) {
-            System.out.print(aux.getNombre() + " -");
-            aux = aux.getSig();
+            while (aux != null) {
+                if (aux.getSig() != null) {
+                    System.out.print(aux.getNombre() + " - ");
+                } else {
+                    System.out.println(aux.getNombre());
+                }
+                aux = aux.getSig();
+            }
         }
-
     }
 
-    //----------------------------------------------------------------------
+    //==================================================//
+    //===============  Métodos Complem.  ===============//
+    //Pre:
+    //Pos: Retorna true si encontró una coincidencia, false si no la encontró
     public boolean buscarCiudad(String ciudad) {
 
         boolean retorno = false;
@@ -160,60 +206,86 @@ public class ListaCiudad implements IListaCiudad {
         return retorno;
     }
 
-    //----------------------------------------------------------------------
-    //Pre: lista ordenada => mantiena orden
-    //Pos: inserta nuevo elemento en orden ascendente
-    public void agregarOrd(int n) {
-        // implementar el metodo
-
-    }
-
     //Pre: lista ordenada
     //Pos: Borra la primer ocurrencia de un elemento dado
-    public void borrarElemento(int n) {
-        // implementar el metodo
+    public void borrarElemento(String ciudad) {
+        if (this.esVacia()) {
+            return;
+        }
+        if (this.inicio.getNombre() == ciudad) {
+            this.borrarInicio();
+        } else {
+            NodoCiudad aux = this.inicio;
+            while (aux.getSig() != null && aux.getSig().getNombre() != ciudad) {
+                aux = aux.getSig();
+            }
+            //Elemento encontrado o final de la lista
+            if (aux.getSig() != null) {
+                NodoCiudad borrar = aux.getSig();
+                aux.setSig(borrar.getSig());
+                borrar.setSig(null);
+            }
+        }
     }
 
     //Pre:
     //Pos: Retorna la cantidad de nodos que tiene la lista
     public int cantElementos() {
-        int resultado = 0;
-        // implementar el metodo
-
-        return resultado;
+        int cant = 0;
+        if (!this.esVacia()) {
+            NodoCiudad aux = this.inicio;
+            while (aux != null) {
+                aux = aux.getSig();
+                cant++;
+            }
+        }
+        return cant;
     }
 
-    //Pre: //Pos:
-    public NodoCiudad obtenerElemento(int n) {
-        NodoCiudad resultado = null;
-        // implementar el metodo
+    //Pre:
+    //Pos:
+    public NodoCiudad obtenerElemento(String ciudad) {
+        NodoCiudad aux = this.inicio;
+        while (aux != null && aux.getNombre() != ciudad) {
+            aux = aux.getSig();
+        }
+        //Elemento encontrado o final de la lista
+        return aux;
 
-        return resultado;
     }
 
-    /**
-     * *** para resolver en forma recursiva Métodos RECURSIVOS ****
-     */
+    //==================================================//
+    //=============  Métodos Recursivos. ===============//
     //Pre:
     //Pos: muestra los datos de la lista en orden de enlace
-    public void mostrarREC(NodoCiudad l) {
-        // implementar el metodo
-
+    public void mostrarRec(NodoCiudad n) {
+        if (n != null) {
+            System.out.println(n.getNombre());
+            mostrarRec(n.getSig());
+        }
     }
 
     //Pre:
     //Pos: muestra los datos de la lista en orden inverso
-    public void mostrarInversoREC(NodoCiudad l) {
-        // implementar el metodo
+    public void mostrarInversoRec(NodoCiudad n) {
+        if (n != null) {
+            mostrarInversoRec(n.getSig());
+            System.out.println(n.getNombre());
+        }
 
     }
 
     //Pre:
     //Pos: retorna true si el elemento pertenece a la lista
-    public boolean existeDatoREC(NodoCiudad l, int n) {
-        boolean resultado = false;
-        // implementar el metodo
-
-        return resultado;
+    public boolean existeDatoRec(NodoCiudad n, String ciudad) {
+        if (n != null) {
+            if (n.getNombre() == ciudad) {
+                return true;
+            } else {
+                return existeDatoRec(n.getSig(), ciudad);
+            }
+        } else {
+            return false;
+        }
     }
 }

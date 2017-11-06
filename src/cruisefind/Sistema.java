@@ -8,7 +8,7 @@ public class Sistema implements ISistema {
     //inicialización de lista de ciudades
     private ListaCiudad lciudad;
 
-    //Pre: La cantidad de ciudades debe ser >= 0;
+    //Pre: cantCiudades >= 0;
     //Post: Setea la cantidad de ciudades que se pueden ingresar
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
@@ -40,7 +40,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
+    //Pre: ciudad != ""
     //Post: Agrega la ciudad al inicio de la lista de ciudades
     @Override
     public Retorno registrarCiudad(String ciudad) {
@@ -51,7 +51,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
+    //Pre: ciudad != "", nombre != ""
     //Post: Agrega el crucero al inicio de la lista de cruceros de la ciudad y
     //con raking 0 en el sistema de reservas
     @Override

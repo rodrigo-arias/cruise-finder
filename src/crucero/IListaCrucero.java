@@ -1,12 +1,14 @@
 package crucero;
 
+import cruisefind.Retorno;
+
 public interface IListaCrucero {
 
     public boolean esVacia();
 
-    public void agregarInicio(int n);
+    public Retorno.Resultado agregarInicio(String ciudad, String nombre, int capacidad, int estrellas);
 
-    public void agregarFinal(int n);
+    public Retorno.Resultado agregarFinal(String ciudad, String nombre, int capacidad, int estrellas);
 
     public void borrarInicio();
 
@@ -15,11 +17,4 @@ public interface IListaCrucero {
     public void vaciar();
 
     public void mostrar();
-
-    //otros metodos para analizar
-//    public void agregarOrd(int n);
-//    public void borrarElemento(int n);
-//    public int cantElementos();
-//    public NodoLista obtenerElemento(int n);
-//    public void mostrarREC(NodoLista l);
 }

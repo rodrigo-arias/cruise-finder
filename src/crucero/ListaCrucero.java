@@ -1,21 +1,24 @@
 package crucero;
 
+import cruisefind.Retorno;
+
 public class ListaCrucero implements IListaCrucero {
+
+    private NodoCrucero inicio;
+    private NodoCrucero fin;
 
     public ListaCrucero() {
         this.inicio = inicio;
         this.fin = fin;
     }
 
-    private NodoCrucero inicio;
-    private NodoCrucero fin;
-
     public void Lista() {
         this.inicio = null;
         this.fin = null;
     }
 
-    //-------------------------------------------------------------------
+    //==================================================//
+    //==================  Properties  ==================//
     public NodoCrucero getInicio() {
         return inicio;
     }
@@ -32,39 +35,92 @@ public class ListaCrucero implements IListaCrucero {
         fin = f;
     }
 
-    //-------------------------------------------------------------------
+    //==================================================//
+    //================  Métodos Básicos  ===============//
     //Pre:
-    //Pos: Retorna true si la lista no tiene nodos
+    //Post: Retorna true si la lista no tiene nodos
     @Override
     public boolean esVacia() {
-        if (this.inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.inicio == null;
     }
 
     //Pre:
     //Pos: Agrega un nuevo Nodo al principio de la lista
     @Override
-    public void agregarInicio(int n) {
-        //implementar el metodo
+    public Retorno.Resultado agregarInicio(String ciudad, String nombre, int capacidad, int estrellas) {
 
+        if (capacidad > 0) {
+
+            if (!this.buscarCrucero(ciudad, nombre)) {
+
+                //Creo el nuevo nodo y le asigno el siguiente
+                NodoCrucero nuevo = new NodoCrucero(ciudad, nombre, capacidad, estrellas);
+                nuevo.setSig(inicio);
+
+                //Asigno el nuevo elemento al inicio y sumo la cantidad
+                this.inicio = nuevo;
+
+                //Primera inserción
+                if (this.fin == null) {
+                    this.fin = nuevo;
+                }
+                return Retorno.Resultado.OK;
+            } else {
+                return Retorno.Resultado.ERROR_1;
+
+            }
+
+        } else {
+            return Retorno.Resultado.ERROR_2;
+        }
     }
 
     //Pre:
     //Pos: Agrega un nuevo Nodo al final de la lista
     @Override
-    public void agregarFinal(int n) {
-        // implementar el metodo
+    public Retorno.Resultado agregarFinal(String ciudad, String nombre, int capacidad, int estrellas) {
 
+        if (capacidad > 0) {
+
+            if (!this.buscarCrucero(ciudad, nombre)) {
+
+                if (this.esVacia()) {
+                    this.agregarInicio(ciudad, nombre, capacidad, estrellas);
+                } else {
+
+                    NodoCrucero aux = this.inicio;
+
+                    //Identifico el último elemento
+                    while (aux.getSig() != null) {
+                        aux = aux.getSig();
+                    }
+
+                    //Creo el nuevo nodo y le asigno el siguiente al que estaba al final
+                    NodoCrucero nuevo = new NodoCrucero(ciudad, nombre, capacidad, estrellas);
+                    aux.setSig(nuevo);
+
+                    //Asigno el nuevo elemento al final y sumo la cantidad
+                    this.fin = nuevo;
+                }
+
+                return Retorno.Resultado.OK;
+            } else {
+                return Retorno.Resultado.ERROR_1;
+
+            }
+
+        } else {
+            return Retorno.Resultado.ERROR_2;
+        }
     }
 
     //Pre:
     //Pos: Borra el primer nodo
     @Override
     public void borrarInicio() {
-        // implementar el metodo
+        if (this.esVacia()) {
+            this.inicio = this.inicio.getSig();
+        }
 
     }
 
@@ -72,77 +128,113 @@ public class ListaCrucero implements IListaCrucero {
     //Pos: Borra el último nodo
     @Override
     public void borrarFin() {
-        // implementar el metodo
-
+        if (!this.esVacia()) {
+            if (this.inicio == this.fin) {
+                this.borrarInicio();
+            } else {
+                NodoCrucero aux = this.inicio;
+                while (aux.getSig().getSig() != null) {
+                    aux = aux.getSig();
+                }
+                this.fin = aux;
+                this.fin.setSig(null);
+            }
+        }
     }
 
     //Pre:
-    //Pos: elimina todos los nodos de una lista dada
+    //Pos: Elimina todos los nodos de una lista dada
     @Override
     public void vaciar() {
-        // implementar el metodo
+        while (inicio != null) {
+            borrarInicio();
+        }
     }
 
     //Pre:
     //Pos: Recorre y muestra los datos de lista
     @Override
     public void mostrar() {
-        // implementar el metodo
+        if (this.esVacia()) {
+            System.out.println("La lista es vacía");
+        } else {
+            NodoCrucero aux = this.inicio;
 
+            while (aux != null) {
+                if (aux.getSig() != null) {
+                    System.out.print(aux.getNombre() + " - ");
+                } else {
+                    System.out.println(aux.getNombre());
+                }
+                aux = aux.getSig();
+            }
+        }
     }
 
-    //-------------------------------------------------------------------
-    //Pre: lista ordenada => mantiena orden
-    //Pos: inserta nuevo elemento en orden ascendente
-    public void agregarOrd(int n) {
-        // implementar el metodo
+    //==================================================//
+    //===============  Métodos Complem.  ===============//
+    //Pre:
+    //Pos: Retorna true si encontró una coincidencia, false si no la encontró
+    public boolean buscarCrucero(String ciudad, String nombre) {
 
+        boolean retorno = false;
+        NodoCrucero aux = this.inicio;
+
+        while (aux != null) {
+            if (aux.getCiudad() == ciudad && aux.getNombre() == nombre) {
+                retorno = true;
+            }
+            aux = aux.getSig();
+        }
+        return retorno;
     }
 
     //Pre: lista ordenada
     //Pos: Borra la primer ocurrencia de un elemento dado
-    public void borrarElemento(int n) {
-        // implementar el metodo
+    public void borrarElemento(String ciudad, String nombre) {
+        if (this.esVacia()) {
+            return;
+        }
+        if (this.inicio.getCiudad() == ciudad && this.inicio.getNombre() == nombre) {
+            this.borrarInicio();
+        } else {
+            NodoCrucero aux = this.inicio;
+            while (aux.getSig() != null && (aux.getSig().getCiudad() != ciudad && aux.getSig().getNombre() != ciudad)) {
+                aux = aux.getSig();
+            }
+            //Elemento encontrado o final de la lista
+            if (aux.getSig() != null) {
+                NodoCrucero borrar = aux.getSig();
+                aux.setSig(borrar.getSig());
+                borrar.setSig(null);
+            }
+        }
     }
 
     //Pre:
     //Pos: Retorna la cantidad de nodos que tiene la lista
     public int cantElementos() {
-        int resultado = 0;
-        // implementar el metodo
-
-        return resultado;
-    }
-
-    //Pre: //Pos:
-    public NodoCrucero obtenerElemento(int n) {
-        NodoCrucero resultado = null;
-        // implementar el metodo
-
-        return resultado;
+        int cant = 0;
+        if (!this.esVacia()) {
+            NodoCrucero aux = this.inicio;
+            while (aux != null) {
+                aux = aux.getSig();
+                cant++;
+            }
+        }
+        return cant;
     }
 
     //Pre:
-    //Pos: muestra los datos de la lista en orden de enlace
-    public void mostrarREC(NodoCrucero l) {
-        // implementar el metodo
+    //Pos:
+    public NodoCrucero obtenerElemento(String ciudad, String nombre) {
+        NodoCrucero aux = this.inicio;
+        while (aux != null && (aux.getNombre() != ciudad && aux.getNombre() != nombre)) {
+            aux = aux.getSig();
+        }
+        //Elemento encontrado o final de la lista
+        return aux;
 
-    }
-
-    //Pre:
-    //Pos: muestra los datos de la lista en orden inverso
-    public void mostrarInversoREC(NodoCrucero l) {
-        // implementar el metodo
-
-    }
-
-    //Pre:
-    //Pos: retorna true si el elemento pertenece a la lista
-    public boolean existeDatoREC(NodoCrucero l, int n) {
-        boolean resultado = false;
-        // implementar el metodo
-
-        return resultado;
     }
 
 }
