@@ -73,6 +73,27 @@ public class ListaCrucero implements IListaCrucero {
         } else {
             return Retorno.Resultado.ERROR_2;
         }
+
+//        if (estrellas < 1 || estrellas > 5) {
+//
+//            ret.resultado = Resultado.ERROR_1;
+//
+//        } else if (capacidad < 0) {
+//
+//            ret.resultado = Resultado.ERROR_2;
+//
+//        }   else if (!lciudad.buscarCrucero(ciudad, nombre)) {
+//
+//            ret.resultado = Resultado.ERROR_4;
+//        } else if (!lciudad.buscarCiudad(ciudad)) {
+//
+//            ret.resultado = Resultado.ERROR_4;
+//
+//        } else {
+//            ret.resultado = Resultado.OK;
+//        }
+//
+//        return ret;
     }
 
     //Pre:

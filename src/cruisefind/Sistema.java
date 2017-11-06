@@ -57,25 +57,7 @@ public class Sistema implements ISistema {
     @Override
     public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
         Retorno ret = new Retorno();
-
-        if (estrellas < 1 || estrellas > 5) {
-
-            ret.resultado = Resultado.ERROR_1;
-
-        } else if (capacidad < 0) {
-
-            ret.resultado = Resultado.ERROR_2;
-
-//        }   else if (!lciudad.buscarCrucero(ciudad, nombre)) {
-//
-//            ret.resultado = Resultado.ERROR_4;
-        } else if (!lciudad.buscarCiudad(ciudad)) {
-
-            ret.resultado = Resultado.ERROR_4;
-
-        } else {
-            ret.resultado = Resultado.OK;
-        }
+        //ret.resultado = ¿agrego el crucero a partir de la ciudad o busco la ciudad en agregar crucero?
 
         return ret;
     }
