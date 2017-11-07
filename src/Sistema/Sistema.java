@@ -1,12 +1,13 @@
-package cruisefind;
+package Sistema;
 
-import ciudad.ListaCiudad;
-import cruisefind.Retorno.Resultado;
+import Datos.IListaCiudad;
+import Dominio.Ciudad;
+import Sistema.Retorno.Resultado;
 
 public class Sistema implements ISistema {
 
     //inicialización de lista de ciudades
-    private ListaCiudad lciudad;
+    private IListaCiudad ciudades;
 
     //Pre: cantCiudades >= 0;
     //Post: Setea la cantidad de ciudades que se pueden ingresar
@@ -14,10 +15,10 @@ public class Sistema implements ISistema {
     public Retorno crearSistemaReservas(int cantCiudades) {
 
         Retorno ret = new Retorno();
-        lciudad = new ListaCiudad();
+        ciudades = new IListaCiudad();
 
         if (cantCiudades >= 0) {
-            lciudad.setCantMaxima(cantCiudades);
+            ciudades.setCantMaxima(cantCiudades);
             ret.resultado = Resultado.OK;
         } else {
             ret.resultado = Resultado.ERROR_1;
@@ -32,9 +33,8 @@ public class Sistema implements ISistema {
 
         Retorno ret = new Retorno();
 
-        lciudad = null;
+        ciudades = new IListaCiudad();
         System.gc();
-
         ret.resultado = Resultado.OK;
 
         return ret;
@@ -46,8 +46,24 @@ public class Sistema implements ISistema {
     public Retorno registrarCiudad(String ciudad) {
 
         Retorno ret = new Retorno();
-        ret.resultado = lciudad.agregarInicio(ciudad);
 
+        if (ciudades.getCantElementos() < ciudades.getCantMaxima() || ciudades.getCantMaxima() == 0) {
+
+            Ciudad newCity = new Ciudad(ciudad);
+
+            if (!ciudades.buscar(newCity)) {
+
+                ciudades.insertarInicio(newCity);
+                ret.resultado = Resultado.OK;
+
+            } else {
+                ret.resultado = Resultado.ERROR_1;
+
+            }
+
+        } else {
+            ret.resultado = Resultado.ERROR_2;
+        }
         return ret;
     }
 

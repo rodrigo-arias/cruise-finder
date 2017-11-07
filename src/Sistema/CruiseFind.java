@@ -1,4 +1,4 @@
-package cruisefind;
+package Sistema;
 
 public class CruiseFind {
 
@@ -11,8 +11,8 @@ public class CruiseFind {
         //llamada a pruebas
         //Prueba11_crearSistemaReservas(s, p);
         //Prueba12_destruirSistemaReservas(s, p);
-        //Prueba13_registrarCiudad(s, p);
-        Prueba14_registrarCrucero(s, p);
+        Prueba13_registrarCiudad(s, p);
+        //Prueba14_registrarCrucero(s, p);
     }
 
     //declaración de pruebas

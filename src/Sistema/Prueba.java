@@ -1,6 +1,6 @@
-package cruisefind;
+package Sistema;
 
-import cruisefind.Retorno.Resultado;
+import Sistema.Retorno.Resultado;
 
 public class Prueba {
 

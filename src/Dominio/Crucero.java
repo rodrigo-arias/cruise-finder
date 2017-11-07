@@ -1,25 +1,23 @@
-package crucero;
+package Dominio;
 
-public class NodoCrucero {
+public class Crucero {
 
     private String nombre;
     private String ciudad;
     private int capacidad;
     private int estrellas;
     //private ListaServicios lservicios;
-    private NodoCrucero sig;
 
-    public NodoCrucero(String nombre, String ciudad, int capacidad, int estrellas) {
+    //==================  Construct  ==================//
+    public Crucero(String nombre, String ciudad, int capacidad, int estrellas) {
         this.ciudad = ciudad;
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.estrellas = estrellas;
         //this.lservicios = new ListaServicios();
-        this.sig = null;
     }
 
-    //==================================================//
-    //==================  Properties  ==================//
+    //==================  Properties  =================//
     public String getNombre() {
         return nombre;
     }
@@ -51,12 +49,5 @@ public class NodoCrucero {
     public void setEstrellas(int estrellas) {
         this.estrellas = estrellas;
     }
-
-    public NodoCrucero getSig() {
-        return sig;
-    }
-
-    public void setSig(NodoCrucero sig) {
-        this.sig = sig;
-    }
+    //===================  Métodos  ===================//
 }
