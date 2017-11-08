@@ -2,6 +2,7 @@ package Sistema;
 
 import Datos.ListaCiudad;
 import Dominio.Ciudad;
+import Dominio.Crucero;
 import Sistema.Retorno.Resultado;
 
 public class Sistema implements ISistema {
@@ -49,11 +50,11 @@ public class Sistema implements ISistema {
 
         if (ciudades.getCantElementos() < ciudades.getCantMaxima() || ciudades.getCantMaxima() == 0) {
 
-            Ciudad newCity = new Ciudad(ciudad);
+            Ciudad nueva = new Ciudad(ciudad);
 
-            if (ciudades.buscar(newCity) == null) {
+            if (ciudades.buscar(nueva) == null) {
 
-                ciudades.insertar(newCity);
+                ciudades.insertar(nueva);
                 ret.resultado = Resultado.OK;
 
             } else {
@@ -72,9 +73,32 @@ public class Sistema implements ISistema {
     //con raking 0 en el sistema de reservas
     @Override
     public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
+        
         Retorno ret = new Retorno();
-        //ret.resultado = ¿agrego el crucero a partir de la ciudad o busco la ciudad en agregar crucero?
-
+        Ciudad ciudadBuscada = new Ciudad(ciudad);
+        
+        if(estrellas < 1 || estrellas > 5 ) {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+        } else if (capacidad < 0) {
+            ret.resultado = Resultado.ERROR_2;
+        } else {
+            if (ciudades.buscar(ciudadBuscada) == null) {
+                ret.resultado = Resultado.ERROR_4;
+            } else {
+                
+                Ciudad ciudadEncontrada = (Ciudad) ciudades.buscar(ciudadBuscada);               
+                Crucero nuevo = new Crucero(ciudad, nombre, estrellas, capacidad);
+                
+                if(ciudadEncontrada.getCruceros().buscar(nuevo) != null) {
+                    ret.resultado = Resultado.ERROR_3;
+                } else {
+                    /**** INSERTAR ORDENADO POR RANKING ****/
+                    /***** INICIALIZAR LISTA SERVICIOS *****/
+                    ciudadEncontrada.getCruceros().insertar(nuevo);
+                    ret.resultado = Resultado.OK;
+                }
+            }
+        }
         return ret;
     }
 

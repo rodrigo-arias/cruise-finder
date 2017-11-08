@@ -127,7 +127,7 @@ public abstract class Lista implements ILista {
 
         while (aux != null) {
             if (aux.getElement().equals(element)) {
-                return aux;
+                return aux.getElement();
             } else {
                 aux = aux.getNext();
             }
