@@ -1,7 +1,7 @@
 package Dominio;
 
 import Datos.ILista;
-import Datos.IListaCiudad;
+import Datos.ListaCrucero;
 import java.util.Objects;
 
 public class Ciudad {
@@ -12,7 +12,7 @@ public class Ciudad {
     //==================  Construct  ==================//
     public Ciudad(String nombre) {
         this.nombre = nombre;
-        //this.cruceros =  new IListaIniciadorVuelosAerolineas((new OrdenarVueloPorEstrellas()));
+        this.cruceros = new ListaCrucero();
     }
 
     //==================  Properties  =================//

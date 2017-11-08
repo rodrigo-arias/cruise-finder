@@ -1,13 +1,13 @@
 package Sistema;
 
-import Datos.IListaCiudad;
+import Datos.ListaCiudad;
 import Dominio.Ciudad;
 import Sistema.Retorno.Resultado;
 
 public class Sistema implements ISistema {
 
     //inicialización de lista de ciudades
-    private IListaCiudad ciudades;
+    private ListaCiudad ciudades;
 
     //Pre: cantCiudades >= 0;
     //Post: Setea la cantidad de ciudades que se pueden ingresar
@@ -15,7 +15,7 @@ public class Sistema implements ISistema {
     public Retorno crearSistemaReservas(int cantCiudades) {
 
         Retorno ret = new Retorno();
-        ciudades = new IListaCiudad();
+        ciudades = new ListaCiudad();
 
         if (cantCiudades >= 0) {
             ciudades.setCantMaxima(cantCiudades);
@@ -33,7 +33,7 @@ public class Sistema implements ISistema {
 
         Retorno ret = new Retorno();
 
-        ciudades = new IListaCiudad();
+        ciudades = new ListaCiudad();
         System.gc();
         ret.resultado = Resultado.OK;
 
@@ -51,9 +51,9 @@ public class Sistema implements ISistema {
 
             Ciudad newCity = new Ciudad(ciudad);
 
-            if (!ciudades.buscar(newCity)) {
+            if (ciudades.buscar(newCity) == null) {
 
-                ciudades.insertarInicio(newCity);
+                ciudades.insertar(newCity);
                 ret.resultado = Resultado.OK;
 
             } else {
