@@ -1,20 +1,31 @@
 package Dominio;
 
+import Datos.ListaGenerica;
+import java.util.Objects;
+
 public class Crucero {
 
     private String nombre;
     private String ciudad;
     private int capacidad;
     private int estrellas;
-    //private ListaServicios lservicios;
+    private int ranking;
+    private ListaGenerica servicios;
+    private ListaGenerica comentarios;
 
     //==================  Construct  ==================//
     public Crucero(String nombre, String ciudad, int capacidad, int estrellas) {
-        this.ciudad = ciudad;
         this.nombre = nombre;
+        this.ciudad = ciudad;
         this.capacidad = capacidad;
         this.estrellas = estrellas;
-        //this.lservicios = new ListaServicios();
+        this.ranking = 0;
+        this.servicios = new ListaGenerica();
+        this.comentarios = new ListaGenerica();
+    }
+
+    public Crucero(String nombre) {
+        this.nombre = nombre;
     }
 
     //==================  Properties  =================//
@@ -49,8 +60,43 @@ public class Crucero {
     public void setEstrellas(int estrellas) {
         this.estrellas = estrellas;
     }
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
+    }
+
+    public ListaGenerica getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(ListaGenerica lservicios) {
+        this.servicios = lservicios;
+    }
+
+    public ListaGenerica getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(ListaGenerica comentarios) {
+        this.comentarios = comentarios;
+    }
+
     //===================  Métodos  ===================//
-        @Override
+//    public void actualizarRanking() {
+//        int total = 0;
+//        int comentarios = 0;
+//
+//        foreach (Comentario c in this.comentarios) {
+//            total == c.ranking;
+//            comentarios++;
+//        }
+//        this.ranking = total / comentarios;
+//    }
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -70,5 +116,12 @@ public class Crucero {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.nombre);
+        return hash;
     }
 }

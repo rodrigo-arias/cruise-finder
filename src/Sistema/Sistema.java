@@ -3,6 +3,7 @@ package Sistema;
 import Datos.ListaCiudad;
 import Dominio.Ciudad;
 import Dominio.Crucero;
+import Dominio.Servicio;
 import Sistema.Retorno.Resultado;
 
 public class Sistema implements ISistema {
@@ -73,28 +74,28 @@ public class Sistema implements ISistema {
     //con raking 0 en el sistema de reservas
     @Override
     public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
-        
+
         Retorno ret = new Retorno();
-        Ciudad ciudadBuscada = new Ciudad(ciudad);
-        
-        if(estrellas < 1 || estrellas > 5 ) {
+        Ciudad cityFind = new Ciudad(ciudad);
+        Ciudad cityLocated = (Ciudad) ciudades.buscar(cityFind);
+
+        if (estrellas < 1 || estrellas > 5) {
             ret.resultado = Retorno.Resultado.ERROR_1;
         } else if (capacidad < 0) {
             ret.resultado = Resultado.ERROR_2;
         } else {
-            if (ciudades.buscar(ciudadBuscada) == null) {
+            if (cityLocated == null) {
                 ret.resultado = Resultado.ERROR_4;
             } else {
-                
-                Ciudad ciudadEncontrada = (Ciudad) ciudades.buscar(ciudadBuscada);               
-                Crucero nuevo = new Crucero(ciudad, nombre, estrellas, capacidad);
-                
-                if(ciudadEncontrada.getCruceros().buscar(nuevo) != null) {
+
+                Crucero nuevo = new Crucero(nombre, ciudad, capacidad, estrellas);
+                Crucero cruceroEncontrado = (Crucero) cityLocated.getCruceros().buscar(nuevo);
+
+                if (cruceroEncontrado != null) {
                     ret.resultado = Resultado.ERROR_3;
                 } else {
-                    /**** INSERTAR ORDENADO POR RANKING ****/
-                    /***** INICIALIZAR LISTA SERVICIOS *****/
-                    ciudadEncontrada.getCruceros().insertar(nuevo);
+                    // INSERTAR ORDENADO POR RANKING
+                    cityLocated.getCruceros().insertar(nuevo);
                     ret.resultado = Resultado.OK;
                 }
             }
@@ -106,7 +107,27 @@ public class Sistema implements ISistema {
     public Retorno ingresarServicio(String ciudad, String crucero, String servicio) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityFind = new Ciudad(ciudad);
+        Ciudad cityLocated = (Ciudad) ciudades.buscar(cityFind);
+        Crucero cruiseFind = new Crucero(crucero);
+
+        if (cityLocated != null) {
+
+            Crucero cruiseLocated = (Crucero) cityLocated.getCruceros().buscar(cruiseFind);
+
+            if (cruiseLocated != null) {
+
+                Servicio nuevo = new Servicio(servicio);
+                cruiseLocated.getServicios().insertar(nuevo);
+                ret.resultado = Resultado.OK;
+
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+            }
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_2;
+        }
 
         return ret;
     }

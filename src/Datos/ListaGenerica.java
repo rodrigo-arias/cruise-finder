@@ -1,45 +1,14 @@
 package Datos;
 
-public class ListaCrucero extends Lista {
+public class ListaGenerica extends Lista {
 
     //==================  Construct  ==================//
-    public ListaCrucero() {
+    public ListaGenerica() {
         super();
     }
 
     //==================  Properties  =================//
-    //
     //===============  Métodos Complem.  ===============//
-    //Pre:
-    //Pos: Agrega un nuevo Nodo al final de la lista
-    @Override
-    public void insertar(Object element) {
-
-        if (this.esVacia()) {
-            //Creo el nuevo nodo, lo asigno como inicio y sumo la cantidad
-            NodoLista nuevo = new NodoLista(element);
-            this.inicio = nuevo;
-            this.fin = nuevo;
-            this.cantElementos++;
-
-        } else {
-
-            NodoLista aux = this.inicio;
-
-            //Identifico el último elemento
-            while (aux.getNext() != null) {
-                aux = aux.getNext();
-            }
-
-            //Creo el nuevo nodo y le asigno el siguiente al que estaba al final
-            NodoLista nuevo = new NodoLista(element);
-            aux.setNext(nuevo);
-
-            //Asigno el nuevo elemento al final y sumo la cantidad
-            this.fin = nuevo;
-            this.cantElementos++;
-        }
-    }
     //Pre: lista ordenada
     //Pos: Borra la primer ocurrencia de un elemento dado
     /*public void borrarElemento(String ciudad) {
