@@ -1,5 +1,7 @@
 package Datos;
 
+import java.util.Iterator;
+
 public abstract class Lista implements ILista {
 
     protected NodoLista inicio;
@@ -133,6 +135,22 @@ public abstract class Lista implements ILista {
             }
         }
         return aux;
+    }
+
+    public Iterator<Object> iterator() {
+        return new Iterator<Object>() {
+            private NodoLista aux = inicio;
+
+            public boolean hasNext() {
+                return aux != null;
+            }
+
+            public Object next() {
+                Object actual = aux.getElement();
+                aux = aux.getNext();
+                return actual;
+            }
+        };
     }
 
 }

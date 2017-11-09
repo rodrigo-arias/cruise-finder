@@ -13,7 +13,8 @@ public class CruiseFind {
         //Prueba12_destruirSistemaReservas(s, p);
         //Prueba13_registrarCiudad(s, p);
         //Prueba14_registrarCrucero(s, p);
-        Prueba15_ingresarServicio(s, p);
+        //Prueba15_ingresarServicio(s, p);
+        Prueba19_ingresarComentario(s, p);
     }
 
     //declaración de pruebas
@@ -66,6 +67,19 @@ public class CruiseFind {
         p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
         p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
         p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Casino"), Retorno.Resultado.OK, "Se ingresó Casino como servicio del Royal Caribbean Int. en Montevideo");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba19_ingresarComentario(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "El crucero es excelente", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. de Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "No me gusto nada", -1), Retorno.Resultado.ERROR_1, "El ranking del comentario no está entre 1 y 5");
+        p.ver(s.ingresarComentario("Montevideo", "Disney Cruise Line", "El crucero está muy bueno", 4), Retorno.Resultado.ERROR_2, "No se encontró un crucero con ese nombre para Montevideo");
+        p.ver(s.ingresarComentario("Rocha", "Royal Caribbean Int.", "Se pueden mejorar algunas cosas", 3), Retorno.Resultado.ERROR_3, "No se encontró la ciudad Rocha");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "Tienen que mejorar la limpieza", 2), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. de Montevideo");
         p.imprimirResultadosPrueba();
     }
 }

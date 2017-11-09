@@ -1,6 +1,6 @@
 package Datos;
 
-public interface ILista {
+public interface ILista extends Iterable<Object> {
 
     public boolean esVacia();
 

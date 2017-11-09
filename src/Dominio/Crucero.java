@@ -86,16 +86,20 @@ public class Crucero {
     }
 
     //===================  Métodos  ===================//
-//    public void actualizarRanking() {
-//        int total = 0;
-//        int comentarios = 0;
-//
-//        foreach (Comentario c in this.comentarios) {
-//            total == c.ranking;
-//            comentarios++;
-//        }
-//        this.ranking = total / comentarios;
-//    }
+    public void actualizarRanking() {
+        int total = 0;
+        int comments = 0;
+
+        for (Object o : comentarios) {
+
+            Comentario com = (Comentario) o;
+            total += com.getRanking();
+
+            comments++;
+        }
+        this.ranking = total / comments;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
