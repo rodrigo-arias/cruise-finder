@@ -5,10 +5,8 @@ public interface ILista extends Iterable<Object> {
     public boolean esVacia();
 
     public void insertar(Object element);
-
-    public void eliminarInicio();
-
-    public void eliminarFinal();
+    
+    public void eliminar(Object element);
 
     public Object buscar(Object element);
 

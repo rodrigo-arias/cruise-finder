@@ -62,33 +62,24 @@ public abstract class Lista implements ILista {
             this.cantElementos++;
         }
     }
-
+    
     //Pre:
-    //Pos: Borra el primer nodo
+    //Pos: Elimina el elemento de la lista
     @Override
-    public void eliminarInicio() {
-        if (this.esVacia()) {
-            this.inicio = this.inicio.getNext();
-        }
-
-    }
-
-    //Pre:
-    //Pos: Borra el último nodo
-    @Override
-    public void eliminarFinal() {
-        if (!this.esVacia()) {
-            if (this.inicio == this.fin) {
-                this.eliminarInicio();
-            } else {
-                NodoLista aux = this.inicio;
-                while (aux.getNext().getNext() != null) {
-                    aux = aux.getNext();
-                }
-                this.fin = aux;
-                this.fin.setNext(null);
+    public void eliminar(Object element) {
+            if(inicio.getElement().equals(element))
+                    inicio = inicio.getNext();
+            else{
+                    NodoLista aux = inicio;
+                    while(aux.getNext()!=null)
+                    {
+                            if(aux.getNext().getElement().equals(element)){
+                                    aux.setNext(aux.getNext().getNext());
+                                    return;
+                            }
+                            else aux = aux.getNext();
+                    }
             }
-        }
     }
 
     //Pre:
@@ -96,7 +87,7 @@ public abstract class Lista implements ILista {
     @Override
     public void vaciar() {
         while (inicio != null) {
-            eliminarInicio();
+            this.inicio = this.inicio.getNext();
         }
     }
 

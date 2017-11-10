@@ -137,7 +137,33 @@ public class Sistema implements ISistema {
     public Retorno borrarServicio(String ciudad, String crucero, String servicio) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = (Ciudad) ciudades.buscar(cityTemp);
+        Crucero cruiseTemp = new Crucero(crucero);
+
+        if (cityFound != null) {
+
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().buscar(cruiseTemp);
+
+            if (cruiseFound != null) {
+
+                Servicio serviceTemp = new Servicio(servicio);
+                Servicio serviceFound = (Servicio) cruiseFound.getServicios().buscar(serviceTemp);
+                
+                if(serviceFound != null) {
+                    cruiseFound.getServicios().eliminar(serviceFound);
+                    ret.resultado = Resultado.OK;
+                } else {
+                    ret.resultado = Resultado.ERROR_2;
+                }
+
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+            }
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_3;
+        }
 
         return ret;
     }

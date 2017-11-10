@@ -68,6 +68,34 @@ public class ListaCiudad extends Lista {
         return aux;
 
     }
+    
+    //Pre:
+    //Pos: Borra el primer nodo
+    @Override
+    public void eliminarInicio() {
+        if (this.esVacia()) {
+            this.inicio = this.inicio.getNext();
+        }
+
+    }
+
+    //Pre:
+    //Pos: Borra el último nodo
+    @Override
+    public void eliminarFinal() {
+        if (!this.esVacia()) {
+            if (this.inicio == this.fin) {
+                this.eliminarInicio();
+            } else {
+                NodoLista aux = this.inicio;
+                while (aux.getNext().getNext() != null) {
+                    aux = aux.getNext();
+                }
+                this.fin = aux;
+                this.fin.setNext(null);
+            }
+        }
+    }
 
     //==================================================//
     //=============  Métodos Recursivos. ===============//
