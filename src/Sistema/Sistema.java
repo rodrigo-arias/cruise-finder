@@ -4,7 +4,6 @@ import Datos.ListaCiudad;
 import Dominio.Ciudad;
 import Dominio.Comentario;
 import Dominio.Crucero;
-import Dominio.Servicio;
 import Sistema.Retorno.Resultado;
 
 public class Sistema implements ISistema {
@@ -54,9 +53,9 @@ public class Sistema implements ISistema {
 
             Ciudad nueva = new Ciudad(ciudad);
 
-            if (ciudades.buscar(nueva) == null) {
+            if (ciudades.find(nueva) == null) {
 
-                ciudades.insertar(nueva);
+                ciudades.insert(nueva);
                 ret.resultado = Resultado.OK;
 
             } else {
@@ -78,7 +77,7 @@ public class Sistema implements ISistema {
 
         Retorno ret = new Retorno();
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.buscar(cityTemp);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
 
         if (estrellas < 1 || estrellas > 5) {
             ret.resultado = Retorno.Resultado.ERROR_1;
@@ -90,13 +89,13 @@ public class Sistema implements ISistema {
             } else {
 
                 Crucero nuevo = new Crucero(nombre, ciudad, capacidad, estrellas);
-                Crucero cruiseFound = (Crucero) cityFound.getCruceros().buscar(nuevo);
+                Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(nuevo);
 
                 if (cruiseFound != null) {
                     ret.resultado = Resultado.ERROR_3;
                 } else {
                     // INSERTAR ORDENADO POR RANKING
-                    cityFound.getCruceros().insertar(nuevo);
+                    cityFound.getCruceros().insert(nuevo);
                     ret.resultado = Resultado.OK;
                 }
             }
@@ -109,17 +108,16 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.buscar(cityTemp);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().buscar(cruiseTemp);
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
-                Servicio nuevo = new Servicio(servicio);
-                cruiseFound.getServicios().insertar(nuevo);
+                cruiseFound.getServicios().insert(servicio);
                 ret.resultado = Resultado.OK;
 
             } else {
@@ -138,20 +136,17 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.buscar(cityTemp);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().buscar(cruiseTemp);
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
-                Servicio serviceTemp = new Servicio(servicio);
-                Servicio serviceFound = (Servicio) cruiseFound.getServicios().buscar(serviceTemp);
-                
-                if(serviceFound != null) {
-                    cruiseFound.getServicios().eliminar(serviceFound);
+                if (cruiseFound.getServicios().find(servicio) != null) {
+                    cruiseFound.getServicios().delete(servicio);
                     ret.resultado = Resultado.OK;
                 } else {
                     ret.resultado = Resultado.ERROR_2;
@@ -172,7 +167,34 @@ public class Sistema implements ISistema {
     public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Crucero cruiseTemp = new Crucero(crucero);
+
+        if (cityFound != null) {
+
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+
+            if (cruiseFound != null) {
+
+                int cupos = cruiseFound.getDisponibles();
+
+                if (cupos > 0) {
+                    cruiseFound.getReservas().insert(cliente);
+                    cruiseFound.setDisponibles(cupos - 1);
+                } else {
+                    cruiseFound.getEsperas().insert(cliente);
+                }
+
+                ret.resultado = Resultado.OK;
+
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+            }
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_2;
+        }
 
         return ret;
     }
@@ -181,7 +203,30 @@ public class Sistema implements ISistema {
     public Retorno cancelarReserva(int cliente, String ciudad, String crucero) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Crucero cruiseTemp = new Crucero(crucero);
+
+        if (cityFound != null) {
+
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+
+            if (cruiseFound != null) {
+
+                if (cruiseFound.getReservas().find(cliente) != null) {
+                    cruiseFound.eliminarReserva(cliente);
+                    ret.resultado = Resultado.OK;
+                } else {
+                    ret.resultado = Resultado.ERROR_2;
+                }
+
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+            }
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_3;
+        }
 
         return ret;
     }
@@ -191,19 +236,19 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.buscar(cityTemp);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (ranking < 0 || ranking > 5) {
             ret.resultado = Retorno.Resultado.ERROR_1;
         } else if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().buscar(cruiseTemp);
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
                 Comentario nuevo = new Comentario(comentario, ranking);
-                cruiseFound.getComentarios().insertar(nuevo);
+                cruiseFound.getComentarios().insert(nuevo);
                 cruiseFound.actualizarRanking();
                 ret.resultado = Resultado.OK;
 
@@ -222,7 +267,31 @@ public class Sistema implements ISistema {
     public Retorno listarServicios(String ciudad, String crucero) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Crucero cruiseTemp = new Crucero(crucero);
+
+        if (cityFound != null) {
+
+            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+
+            if (cruiseFound != null) {
+
+                if (cruiseFound.getServicios().isEmpty()) {
+                    System.out.println("No existen servicios registrados en el Crucero " + cruiseFound.getNombre() + " " + cityFound.getNombre());
+                } else {
+                    System.out.println("Servicios del Crucero " + cruiseFound.getNombre() + " " + cityFound.getNombre());
+                    cruiseFound.listarServicios();
+                }
+                ret.resultado = Resultado.OK;
+
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+            }
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_2;
+        }
 
         return ret;
     }
@@ -231,8 +300,22 @@ public class Sistema implements ISistema {
     public Retorno listarCrucerosCiudad(String ciudad) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
 
+        if (cityFound != null) {
+
+            if (cityFound.getCruceros().isEmpty()) {
+                System.out.println("No existen cruceros registrados en " + cityFound.getNombre());
+            } else {
+                System.out.println("Cruceros en " + cityFound.getNombre());
+                cityFound.listarCruceros();
+            }
+            ret.resultado = Resultado.OK;
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+        }
         return ret;
     }
 

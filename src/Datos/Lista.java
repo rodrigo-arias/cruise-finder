@@ -28,75 +28,65 @@ public abstract class Lista implements ILista {
     //Post: Retorna true si la lista no tiene nodos
 
     @Override
-    public boolean esVacia() {
+    public boolean isEmpty() {
         return this.inicio == null;
     }
 
     //Pre:
     //Pos: Agrega un nuevo Nodo al final de la lista
     @Override
-    public void insertar(Object element) {
+    public void insert(Object element) {
+        //inicio = new NodoLista(element, this.inicio);
 
-        if (this.esVacia()) {
-            //Creo el nuevo nodo, lo asigno como inicio y sumo la cantidad
-            NodoLista nuevo = new NodoLista(element);
-            this.inicio = nuevo;
+        NodoLista nuevo = new NodoLista(element);
+
+        nuevo.setNext(inicio);
+
+        this.inicio = nuevo;
+
+        if (this.fin == null) {
             this.fin = nuevo;
-            this.cantElementos++;
-
-        } else {
-
-            NodoLista aux = this.inicio;
-
-            //Identifico el último elemento
-            while (aux.getNext() != null) {
-                aux = aux.getNext();
-            }
-
-            //Creo el nuevo nodo y le asigno el siguiente al que estaba al final
-            NodoLista nuevo = new NodoLista(element);
-            aux.setNext(nuevo);
-
-            //Asigno el nuevo elemento al final y sumo la cantidad
-            this.fin = nuevo;
-            this.cantElementos++;
         }
+
+        this.cantElementos++;
     }
-    
-    //Pre:
-    //Pos: Elimina el elemento de la lista
+
+//Pre:
+//Pos: Elimina el elemento de la lista
     @Override
-    public void eliminar(Object element) {
-            if(inicio.getElement().equals(element))
-                    inicio = inicio.getNext();
-            else{
-                    NodoLista aux = inicio;
-                    while(aux.getNext()!=null)
-                    {
-                            if(aux.getNext().getElement().equals(element)){
-                                    aux.setNext(aux.getNext().getNext());
-                                    return;
-                            }
-                            else aux = aux.getNext();
-                    }
+    public void delete(Object element) {
+        if (inicio.getElement().equals(element)) {
+            inicio = inicio.getNext();
+        } else {
+            NodoLista aux = inicio;
+            while (aux.getNext() != null) {
+                if (aux.getNext().getElement().equals(element)) {
+                    aux.setNext(aux.getNext().getNext());
+                    return;
+                } else {
+                    aux = aux.getNext();
+                }
             }
+        }
+        this.cantElementos--;
     }
 
     //Pre:
     //Pos: Elimina todos los nodos de una lista dada
     @Override
-    public void vaciar() {
+    public void empty() {
         while (inicio != null) {
             this.inicio = this.inicio.getNext();
         }
+        this.cantElementos = 0;
     }
 
     //Pre:
     //Pos: Recorre y muestra los datos de lista
     @Override
-    public void mostrar() {
-        if (this.esVacia()) {
-            System.out.println("La lista es vacía");
+    public void show() {
+        if (this.isEmpty()) {
+            System.out.println("La lista está vacía");
         } else {
             NodoLista aux = this.inicio;
 
@@ -114,7 +104,7 @@ public abstract class Lista implements ILista {
     //Pre:
     //Pos: Retorna true si encontró una coincidencia, false si no la encontró
     @Override
-    public Object buscar(Object element) {
+    public Object find(Object element) {
 
         NodoLista aux = this.inicio;
 

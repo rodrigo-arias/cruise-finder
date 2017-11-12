@@ -2,15 +2,15 @@ package Datos;
 
 public interface ILista extends Iterable<Object> {
 
-    public boolean esVacia();
+    public boolean isEmpty();
 
-    public void insertar(Object element);
+    public void insert(Object element);
     
-    public void eliminar(Object element);
+    public void delete(Object element);
 
-    public Object buscar(Object element);
+    public Object find(Object element);
 
-    public void vaciar();
+    public void empty();
 
-    public void mostrar();
+    public void show();
 }

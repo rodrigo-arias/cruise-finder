@@ -21,9 +21,41 @@ public class ListaCiudad extends Lista {
 
     //==================================================//
     //===============  Métodos Complem.  ===============//
+
+    /*
+
+    @Override
+    public void insertEnd(Object element) {
+
+        if (this.isEmpty()) {
+            //Creo el nuevo nodo, lo asigno como inicio y sumo la cantidad
+            NodoLista nuevo = new NodoLista(element);
+            this.inicio = nuevo;
+            this.fin = nuevo;
+            this.cantElementos++;
+
+        } else {
+
+            NodoLista aux = this.inicio;
+
+            //Identifico el último elemento
+            while (aux.getNext() != null) {
+                aux = aux.getNext();
+            }
+
+            //Creo el nuevo nodo y le asigno el siguiente al que estaba al final
+            NodoLista nuevo = new NodoLista(element);
+            aux.setNext(nuevo);
+
+            //Asigno el nuevo elemento al final y sumo la cantidad
+            this.fin = nuevo;
+            this.cantElementos++;
+        }
+    }
+
     //Pre: lista ordenada
     //Pos: Borra la primer ocurrencia de un elemento dado
-    /*public void borrarElemento(String ciudad) {
+    public void borrarElemento(String ciudad) {
         if (this.esVacia()) {
             return;
         }
@@ -68,7 +100,7 @@ public class ListaCiudad extends Lista {
         return aux;
 
     }
-    
+
     //Pre:
     //Pos: Borra el primer nodo
     @Override

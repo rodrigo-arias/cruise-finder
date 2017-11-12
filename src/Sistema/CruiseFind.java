@@ -14,8 +14,12 @@ public class CruiseFind {
         //Prueba13_registrarCiudad(s, p);
         //Prueba14_registrarCrucero(s, p);
         //Prueba15_ingresarServicio(s, p);
-        Prueba16_borrarServicio(s, p);
+        //Prueba16_borrarServicio(s, p);
+        //Prueba17_realizarRerserva(s, p);
+        //Prueba18_cancelarRerserva(s, p);
         //Prueba19_ingresarComentario(s, p);
+        //Prueba110_listarServicios(s, p);
+        Prueba111_listarCrucerosCiudad(s, p);
     }
 
     //declaración de pruebas
@@ -40,12 +44,12 @@ public class CruiseFind {
 
         p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
         p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
-        p.ver(s.registrarCiudad("Rocha"), Retorno.Resultado.OK, "Se ingresó Rocha");
-        p.ver(s.registrarCiudad("Atlantida"), Retorno.Resultado.OK, "Se ingresó Atlantida");
-        p.ver(s.registrarCiudad("Colonia"), Retorno.Resultado.OK, "Se ingresó Colonia");
+        p.ver(s.registrarCiudad("Santiago"), Retorno.Resultado.OK, "Se ingresó Santiago");
+        p.ver(s.registrarCiudad("Lima"), Retorno.Resultado.OK, "Se ingresó Lima");
+        p.ver(s.registrarCiudad("San Pablo"), Retorno.Resultado.OK, "Se ingresó San Pablo");
         p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.ERROR_1, "Montevideo ya existe");
-        p.ver(s.registrarCiudad("Punta del Este"), Retorno.Resultado.OK, "Se ingresó Punta del Este");
-        p.ver(s.registrarCiudad("Maldonado"), Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades gestionados por el sistema");
+        p.ver(s.registrarCiudad("New York"), Retorno.Resultado.OK, "Se ingresó New York");
+        p.ver(s.registrarCiudad("Buenos Aires"), Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades gestionados por el sistema");
         p.imprimirResultadosPrueba();
 
     }
@@ -55,10 +59,10 @@ public class CruiseFind {
         p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
         p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
         p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
-        p.ver(s.registrarCrucero("Rocha", "Carnival Cruise Lines", 6, 2800), Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");
-        p.ver(s.registrarCrucero("Rocha", "Royal Caribbean Int.", 5, -1), Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
+        p.ver(s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800), Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");
+        p.ver(s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1), Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
         p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 4, 3100), Retorno.Resultado.ERROR_3, "Ya existe un crucero con ese nombre para Montevideo");
-        p.ver(s.registrarCrucero("Piriapolis", "Disney Cruise Line", 5, 2200), Retorno.Resultado.ERROR_4, "La ciudad no existe");
+        p.ver(s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200), Retorno.Resultado.ERROR_4, "La ciudad no existe");
         p.imprimirResultadosPrueba();
     }
 
@@ -70,7 +74,7 @@ public class CruiseFind {
         p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Casino"), Retorno.Resultado.OK, "Se ingresó Casino como servicio del Royal Caribbean Int. en Montevideo");
         p.imprimirResultadosPrueba();
     }
-    
+
     public static void Prueba16_borrarServicio(Sistema s, Prueba p) {
 
         p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
@@ -78,8 +82,38 @@ public class CruiseFind {
         p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
         p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Casino"), Retorno.Resultado.OK, "Se ingresó Casino como servicio del Royal Caribbean Int. en Montevideo");
         p.ver(s.borrarServicio("Montevideo", "Disney Cruise Line", "Casino"), Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
-        p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Piscina"), Retorno.Resultado.ERROR_2, "No existe un servicio Piscina en el Royal Caribbean Int.");
-        p.ver(s.ingresarServicio("Punta del Este", "Royal Caribbean Int.", "Casino"), Retorno.Resultado.ERROR_3, "No existe la ciudad Punta del Este");
+        p.ver(s.borrarServicio("Montevideo", "Royal Caribbean Int.", "Piscina"), Retorno.Resultado.ERROR_2, "No existe un servicio Piscina en el Royal Caribbean Int.");
+        p.ver(s.borrarServicio("Santiago", "Royal Caribbean Int.", "Casino"), Retorno.Resultado.ERROR_3, "No existe la ciudad Santiago");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba17_realizarRerserva(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
+        p.ver(s.realizarReserva(1, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se realizó la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(2, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se realizó la reserva del cliente 2 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(3, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se realizó la reserva del cliente 3 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(4, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "El cliente 4 quedó en lista de espera para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(5, "Montevideo", "Disney Cruise Line"), Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
+        p.ver(s.realizarReserva(6, "San Pablo", "Royal Caribbean Int."), Retorno.Resultado.ERROR_2, "No existe la ciudad San Pablo");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba18_cancelarRerserva(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
+        p.ver(s.realizarReserva(1, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se realizó la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(2, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se realizó la reserva del cliente 2 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(1, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se realizó la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(4, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "El cliente 4 quedó en lista de espera para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.cancelarReserva(1, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se canceló la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo, pasa el cliente 4 de a lista de espera");
+        p.ver(s.cancelarReserva(5, "Montevideo", "Disney Cruise Line"), Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
+        p.ver(s.cancelarReserva(7, "Montevideo", "Royal Caribbean Int."), Retorno.Resultado.ERROR_2, "El cliente 7 no tiene reservas para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.cancelarReserva(2, "San Pablo", "Royal Caribbean Int."), Retorno.Resultado.ERROR_3, "No existe la ciudad San Pablo");
         p.imprimirResultadosPrueba();
     }
 
@@ -91,8 +125,36 @@ public class CruiseFind {
         p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "El crucero es excelente", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. de Montevideo");
         p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "No me gusto nada", -1), Retorno.Resultado.ERROR_1, "El ranking del comentario no está entre 0 y 5");
         p.ver(s.ingresarComentario("Montevideo", "Disney Cruise Line", "El crucero está muy bueno", 4), Retorno.Resultado.ERROR_2, "No se encontró un crucero con ese nombre para Montevideo");
-        p.ver(s.ingresarComentario("Rocha", "Royal Caribbean Int.", "Se pueden mejorar algunas cosas", 3), Retorno.Resultado.ERROR_3, "No se encontró la ciudad Rocha");
+        p.ver(s.ingresarComentario("San Pablo", "Royal Caribbean Int.", "Se pueden mejorar algunas cosas", 3), Retorno.Resultado.ERROR_3, "No se encontró la ciudad San Pablo");
         p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "Tienen que mejorar la limpieza", 2), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. de Montevideo");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba110_listarServicios(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Casino"), Retorno.Resultado.OK, "Se ingresó Casino como servicio del Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Piscina"), Retorno.Resultado.OK, "Se ingresó Piscina como servicio del Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Masajes"), Retorno.Resultado.OK, "Se ingresó Masajes como servicio del Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarServicio("Montevideo", "Royal Caribbean Int.", "Habitación King"), Retorno.Resultado.OK, "Se ingresó Habitación King Casino como servicio del Royal Caribbean Int. en Montevideo");
+        p.ver(s.listarServicios("Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se listan los serivios del Royal Caribbean Int. en Montevideo");
+        p.ver(s.listarServicios("Montevideo", "Disney Cruise Line"), Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
+        p.ver(s.listarServicios("San Pablo", "Royal Caribbean Int."), Retorno.Resultado.ERROR_2, "No existe la ciudad San Pablo");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba111_listarCrucerosCiudad(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("San Pablo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCrucero("San Pablo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en San Pablo");
+        p.ver(s.registrarCrucero("San Pablo", "Carnival Cruise Lines", 4, 2800), Retorno.Resultado.OK, "Se ingresó Carnival Cruise Lines en San Pablo");
+        p.ver(s.registrarCrucero("San Pablo", "Celebrity Reflection", 3, 1300), Retorno.Resultado.OK, "Se ingresó Celebrity Reflection en San Pablo");
+        p.ver(s.registrarCrucero("San Pablo", "Disney Cruise Line", 5, 2200), Retorno.Resultado.OK, "Se ingresó Disney Cruise Line en San Pablo");
+        p.ver(s.listarCrucerosCiudad("San Pablo"), Retorno.Resultado.OK, "Se listan los cruceros de San Pablo");
+        p.ver(s.listarCrucerosCiudad("Lima"), Retorno.Resultado.ERROR_1, "No existe la ciudad Lima");
         p.imprimirResultadosPrueba();
     }
 }

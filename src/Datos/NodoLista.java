@@ -11,7 +11,7 @@ public class NodoLista {
         this.next = null;
     }
 
-    public NodoLista(Object objetoRecibo, NodoLista siguienteObjeto) {
+    public NodoLista(Object element, NodoLista next) {
         this.element = element;
         this.next = next;
     }

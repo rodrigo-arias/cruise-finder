@@ -49,15 +49,21 @@ public class Ciudad {
             if (other.nombre != null) {
                 return false;
             }
-        } else if (!nombre.equals(other.nombre)) {
+        } else if (!nombre.toLowerCase().equals(other.nombre.toLowerCase())) {
             return false;
         }
         return true;
     }
 
+    public void listarCruceros() {
+        for (Object element : cruceros) {
+            System.out.println(element.toString());
+        }
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 29 * hash + Objects.hashCode(this.nombre);
         return hash;
     }

@@ -1,9 +1,10 @@
 package Dominio;
 
+import Datos.Cola;
 import Datos.ListaGenerica;
 import java.util.Objects;
 
-public class Crucero {
+public class Crucero implements Comparable<Crucero> {
 
     private String nombre;
     private String ciudad;
@@ -12,6 +13,9 @@ public class Crucero {
     private int ranking;
     private ListaGenerica servicios;
     private ListaGenerica comentarios;
+    private ListaGenerica reservas;
+    private Cola esperas;
+    private int disponibles;
 
     //==================  Construct  ==================//
     public Crucero(String nombre, String ciudad, int capacidad, int estrellas) {
@@ -22,6 +26,9 @@ public class Crucero {
         this.ranking = 0;
         this.servicios = new ListaGenerica();
         this.comentarios = new ListaGenerica();
+        this.reservas = new ListaGenerica();
+        this.esperas = new Cola();
+        this.disponibles = capacidad;
     }
 
     public Crucero(String nombre) {
@@ -85,6 +92,30 @@ public class Crucero {
         this.comentarios = comentarios;
     }
 
+    public ListaGenerica getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(ListaGenerica reservas) {
+        this.reservas = reservas;
+    }
+
+    public Cola getEsperas() {
+        return esperas;
+    }
+
+    public void setEsperas(Cola esperas) {
+        this.esperas = esperas;
+    }
+
+    public int getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(int disponibles) {
+        this.disponibles = disponibles;
+    }
+
     //===================  Métodos  ===================//
     public void actualizarRanking() {
         int total = 0;
@@ -98,6 +129,26 @@ public class Crucero {
             comments++;
         }
         this.ranking = total / comments;
+    }
+
+    public void eliminarReserva(int cliente) {
+        this.reservas.delete(cliente);
+        this.disponibles++;
+
+        if (!esperas.isEmpty()) {
+            int firstHold = (int) esperas.first();
+            this.esperas.delete(firstHold);
+            this.reservas.insert(firstHold);
+            this.disponibles--;
+        }
+    }
+
+    public void listarServicios() {
+        int num = 1;
+        for (Object element : servicios) {
+            System.out.println(num + " - " + element.toString());
+            num++;
+        }
     }
 
     @Override
@@ -116,7 +167,7 @@ public class Crucero {
             if (other.nombre != null) {
                 return false;
             }
-        } else if (!nombre.equals(other.nombre)) {
+        } else if (!nombre.toLowerCase().equals(other.nombre.toLowerCase())) {
             return false;
         }
         return true;
@@ -125,7 +176,18 @@ public class Crucero {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + Objects.hashCode(this.nombre.toLowerCase());
         return hash;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre + " " + this.estrellas + " " + this.ranking;
+    }
+
+    @Override
+    public int compareTo(Crucero element) {
+        Crucero other = (Crucero) element;
+        return this.nombre.compareTo(other.nombre);
     }
 }
