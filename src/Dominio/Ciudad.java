@@ -56,6 +56,22 @@ public class Ciudad {
     }
 
     public void listarCruceros() {
+        ListaCrucero<Crucero> temp = new ListaCrucero<>();
+
+        for (Object c : cruceros) {
+            temp.insert(c);
+        }
+
+        //ORDERNAR TEMP POR RANKING
+        Crucero prueba = new Crucero("Crucero Rodrigo");
+        temp.insert(prueba);
+
+        for (Object element : temp) {
+            System.out.println(element.toString());
+        }
+
+        System.out.println();
+
         for (Object element : cruceros) {
             System.out.println(element.toString());
         }

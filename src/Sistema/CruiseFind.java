@@ -19,9 +19,9 @@ public class CruiseFind {
         //Prueba18_cancelarRerserva(s, p);
         //Prueba19_ingresarComentario(s, p);
         //Prueba110_listarServicios(s, p);
-        //Prueba111_listarCrucerosCiudad(s, p);
+        Prueba111_listarCrucerosCiudad(s, p);
         //Prueba112_listarCrucerosRanking(s, p);
-        Prueba114_listarComentarios(s, p);
+        //Prueba114_listarComentarios(s, p);
     }
 
     //declaración de pruebas

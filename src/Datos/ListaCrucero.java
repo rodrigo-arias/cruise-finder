@@ -1,6 +1,7 @@
 package Datos;
 
 import Dominio.Crucero;
+import java.util.Comparator;
 
 public class ListaCrucero<T> extends Lista {
 
@@ -57,5 +58,15 @@ public class ListaCrucero<T> extends Lista {
             aux.setNext(nuevo);
         }
         this.cantElementos++;
+    }
+
+    public Comparator<Crucero> rankingComparator = new Comparator<Crucero>() {
+        public int compare(Crucero c1, Crucero c2) {
+            return c1.getRanking() - c2.getRanking();
+        }
+    };
+
+    public Comparator<Crucero> getRankingComparator() {
+        return rankingComparator;
     }
 }

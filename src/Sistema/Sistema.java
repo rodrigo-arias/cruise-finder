@@ -388,9 +388,10 @@ public class Sistema implements ISistema {
             if (cruiseFound != null) {
 
                 if (cruiseFound.getComentarios().isEmpty()) {
-                    System.out.println("No se han agregado comentarios al Crucero " + cruiseFound.getNombre() + " " + cityFound.getNombre());
+                    System.out.println("No se han agregado comentarios al  servicios registrados en el Crucero " + cruiseFound.getNombre() + " " + cityFound.getNombre());
                 } else {
-                    cruiseFound.listarComentarios();
+                    System.out.println("Servicios del Crucero " + cruiseFound.getNombre() + " " + cityFound.getNombre());
+                    cruiseFound.listarServicios();
                 }
                 ret.resultado = Resultado.OK;
 
