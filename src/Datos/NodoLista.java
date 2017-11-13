@@ -1,35 +1,35 @@
 package Datos;
 
-public class NodoLista {
+public class NodoLista<T> {
 
-    private Object element;
-    private NodoLista next;
+    private T element;
+    private NodoLista<T> next;
 
     //==================  Construct  ==================//
-    public NodoLista(Object element) {
+    public NodoLista(T element) {
         this.element = element;
         this.next = null;
     }
 
-    public NodoLista(Object element, NodoLista next) {
+    public NodoLista(T element, NodoLista<T> next) {
         this.element = element;
         this.next = next;
     }
 
     //==================  Properties  ==================//
-    public Object getElement() {
+    public T getElement() {
         return element;
     }
 
-    public void setElement(String nombre) {
+    public void setElement(T element) {
         this.element = element;
     }
 
-    public NodoLista getNext() {
+    public NodoLista<T> getNext() {
         return this.next;
     }
 
-    public void setNext(NodoLista s) {
-        this.next = s;
+    public void setNext(NodoLista<T> n) {
+        this.next = n;
     }
 }

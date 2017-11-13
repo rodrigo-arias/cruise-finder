@@ -2,10 +2,10 @@ package Datos;
 
 import java.util.Iterator;
 
-public abstract class Lista implements ILista {
+public abstract class Lista<T> implements ILista<T> {
 
-    protected NodoLista inicio;
-    protected NodoLista fin;
+    protected NodoLista<T> inicio;
+    protected NodoLista<T> fin;
     protected int cantElementos;
 
     //==================  Construct  ==================//
@@ -35,10 +35,10 @@ public abstract class Lista implements ILista {
     //Pre:
     //Pos: Agrega un nuevo Nodo al final de la lista
     @Override
-    public void insert(Object element) {
-        //inicio = new NodoLista(element, this.inicio);
+    public void insert(T element) {
+        //inicio = new NodoLista<>(element, this.inicio);
 
-        NodoLista nuevo = new NodoLista(element);
+        NodoLista<T> nuevo = new NodoLista<>(element);
 
         nuevo.setNext(inicio);
 
@@ -54,11 +54,11 @@ public abstract class Lista implements ILista {
 //Pre:
 //Pos: Elimina el elemento de la lista
     @Override
-    public void delete(Object element) {
+    public void delete(T element) {
         if (inicio.getElement().equals(element)) {
             inicio = inicio.getNext();
         } else {
-            NodoLista aux = inicio;
+            NodoLista<T> aux = inicio;
             while (aux.getNext() != null) {
                 if (aux.getNext().getElement().equals(element)) {
                     aux.setNext(aux.getNext().getNext());
@@ -88,7 +88,7 @@ public abstract class Lista implements ILista {
         if (this.isEmpty()) {
             System.out.println("La lista está vacía");
         } else {
-            NodoLista aux = this.inicio;
+            NodoLista<T> aux = this.inicio;
 
             while (aux != null) {
                 if (aux.getNext() != null) {
@@ -104,30 +104,30 @@ public abstract class Lista implements ILista {
     //Pre:
     //Pos: Retorna true si encontró una coincidencia, false si no la encontró
     @Override
-    public Object find(Object element) {
+    public T find(T element) {
 
-        NodoLista aux = this.inicio;
+        NodoLista<T> aux = this.inicio;
 
-        while (aux != null) {
-            if (aux.getElement().equals(element)) {
-                return aux.getElement();
-            } else {
-                aux = aux.getNext();
-            }
+        while (aux != null && !aux.getElement().equals(element)) {
+            aux = aux.getNext();
         }
-        return aux;
+        if (aux != null) {
+            return aux.getElement();
+        } else {
+            return null;
+        }
     }
 
-    public Iterator<Object> iterator() {
-        return new Iterator<Object>() {
-            private NodoLista aux = inicio;
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private NodoLista<T> aux = inicio;
 
             public boolean hasNext() {
                 return aux != null;
             }
 
-            public Object next() {
-                Object actual = aux.getElement();
+            public T next() {
+                T actual = aux.getElement();
                 aux = aux.getNext();
                 return actual;
             }

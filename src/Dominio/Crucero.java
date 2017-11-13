@@ -151,6 +151,14 @@ public class Crucero implements Comparable<Crucero> {
         }
     }
 
+    public void listarComentarios() {
+        int num = 1;
+        for (Object element : comentarios) {
+            System.out.println(num + " - " + element.toString());
+            num++;
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -187,7 +195,7 @@ public class Crucero implements Comparable<Crucero> {
 
     @Override
     public int compareTo(Crucero element) {
-        Crucero other = (Crucero) element;
+        Crucero other = element;
         return this.nombre.compareTo(other.nombre);
     }
 }

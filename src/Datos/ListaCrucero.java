@@ -1,35 +1,61 @@
 package Datos;
 
-//import java.util.Comparator;
-public class ListaCrucero extends Lista {
+import Dominio.Crucero;
 
-    //private Comparator<Object> equalizer;
+public class ListaCrucero<T> extends Lista {
+
     //==================  Construct  ==================//
     public ListaCrucero() {
         super();
-        //this.equalizer = equalizer;
     }
 
     //==================  Properties  =================//
-    //
+    public NodoLista<T> getInicio() {
+        return inicio;
+    }
+
     //===============  Métodos Complem.  ===============//
+    public Crucero find(Crucero element) {
+
+        NodoLista<Crucero> aux = this.inicio;
+
+        while (aux != null && !aux.getElement().equals(element)) {
+            aux = aux.getNext();
+        }
+        if (aux != null) {
+            return aux.getElement();
+        } else {
+            return null;
+        }
+    }
+
     //Pre:
     //Pos: Agrega un nuevo Nodo al final de la lista
-//    @Override
-//    public void insert(Object element) {
-//
-//        if (this.isEmpty() || equalizer.compare(inicio.getElement(), element) >= 0) {
-//            inicio = new NodoLista(element, inicio);
-//        } else {
-//
-//            NodoLista aux = this.inicio;
-//
-//            while (aux.getNext() != null && equalizer.compare(aux.getNext().getElement(), element) < 0) {
-//                aux = aux.getNext();
-//            }
-//            NodoLista nuevo = new NodoLista(element);
-//            aux.setNext(nuevo);
-//        }
-//        this.cantElementos++;
-//    }
+    public void insert(Crucero element) {
+
+        NodoLista<Crucero> aux = this.inicio;
+
+        //Primer elemento
+        if (this.isEmpty()) {
+            NodoLista<Crucero> nuevo = new NodoLista(element);
+            this.inicio = this.fin = nuevo;
+
+            //Es menor al inicio
+        } else if (aux.getElement().compareTo(element) >= 0) {
+            this.inicio = new NodoLista(element, inicio);
+
+        } else {
+            //Busco el final o el siguiente mayor
+            while (aux.getNext() != null && aux.getNext().getElement().compareTo(element) < 0) {
+                aux = aux.getNext();
+            }
+            NodoLista nuevo = new NodoLista(element, aux.getNext());
+
+            if (aux.getNext() == null) {
+                this.fin = nuevo;
+            }
+            aux.setNext(nuevo);
+        }
+        this.cantElementos++;
+    }
 }

@@ -19,7 +19,9 @@ public class CruiseFind {
         //Prueba18_cancelarRerserva(s, p);
         //Prueba19_ingresarComentario(s, p);
         //Prueba110_listarServicios(s, p);
-        Prueba111_listarCrucerosCiudad(s, p);
+        //Prueba111_listarCrucerosCiudad(s, p);
+        //Prueba112_listarCrucerosRanking(s, p);
+        Prueba114_listarComentarios(s, p);
     }
 
     //declaración de pruebas
@@ -153,8 +155,41 @@ public class CruiseFind {
         p.ver(s.registrarCrucero("San Pablo", "Carnival Cruise Lines", 4, 2800), Retorno.Resultado.OK, "Se ingresó Carnival Cruise Lines en San Pablo");
         p.ver(s.registrarCrucero("San Pablo", "Celebrity Reflection", 3, 1300), Retorno.Resultado.OK, "Se ingresó Celebrity Reflection en San Pablo");
         p.ver(s.registrarCrucero("San Pablo", "Disney Cruise Line", 5, 2200), Retorno.Resultado.OK, "Se ingresó Disney Cruise Line en San Pablo");
-        p.ver(s.listarCrucerosCiudad("San Pablo"), Retorno.Resultado.OK, "Se listan los cruceros de San Pablo");
+        p.ver(s.listarCrucerosCiudad("San Pablo"), Retorno.Resultado.OK, "Se listan los cruceros de San Pablo por nombre");
         p.ver(s.listarCrucerosCiudad("Lima"), Retorno.Resultado.ERROR_1, "No existe la ciudad Lima");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba112_listarCrucerosRanking(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("Lima"), Retorno.Resultado.OK, "Se ingresó Lima");
+        p.ver(s.registrarCrucero("Lima", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Lima");
+        p.ver(s.registrarCrucero("Lima", "Carnival Cruise Lines", 4, 2800), Retorno.Resultado.OK, "Se ingresó Carnival Cruise Lines en Lima");
+        p.ver(s.registrarCrucero("Lima", "Celebrity Reflection", 3, 1300), Retorno.Resultado.OK, "Se ingresó Celebrity Reflection en Lima");
+        p.ver(s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200), Retorno.Resultado.OK, "Se ingresó Disney Cruise Line en Lima");
+        p.ver(s.ingresarComentario("Lima", "Royal Caribbean Int.", "Recomendable", 3), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. de Lima");
+        p.ver(s.ingresarComentario("Lima", "Celebrity Reflection", "El crucero es excelente", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Celebrity Reflection de Lima");
+        p.ver(s.ingresarComentario("Lima", "Disney Cruise Line", "Descuidada la higiene", 2), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Lima");
+        p.ver(s.listarCrucerosRankingAsc("Lima"), Retorno.Resultado.OK, "Se listan los cruceros de Lima por ranking ascendente");
+        p.ver(s.listarCrucerosRankingAsc("New York"), Retorno.Resultado.ERROR_1, "No existe la ciudad New York");
+        p.ver(s.listarCrucerosRankingDesc("Lima"), Retorno.Resultado.OK, "Se listan los cruceros de Lima por ranking descendente");
+        p.ver(s.listarCrucerosRankingDesc("Buenos Aires"), Retorno.Resultado.ERROR_1, "No existe la ciudad New York");
+        p.imprimirResultadosPrueba();
+    }
+
+    public static void Prueba114_listarComentarios(Sistema s, Prueba p) {
+
+        p.ver(s.crearSistemaReservas(5), Retorno.Resultado.OK, "Se creó el sistema de reservas");
+        p.ver(s.registrarCiudad("Montevideo"), Retorno.Resultado.OK, "Se ingresó Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3100), Retorno.Resultado.OK, "Se ingresó Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "Excelente", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "Me gustó mucho", 4), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "Muy recomendable, excelente piscina", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. en Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "La comida estaba en mal estado", 2), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. en Montevideo");
+        p.ver(s.listarComentarios("Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se listan los serivios del Royal Caribbean Int. en Montevideo");
+        p.ver(s.listarComentarios("Montevideo", "Disney Cruise Line"), Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
+        p.ver(s.listarComentarios("San Pablo", "Royal Caribbean Int."), Retorno.Resultado.ERROR_2, "No existe la ciudad San Pablo");
         p.imprimirResultadosPrueba();
     }
 }

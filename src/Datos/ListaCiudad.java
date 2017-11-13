@@ -1,6 +1,8 @@
 package Datos;
 
-public class ListaCiudad extends Lista {
+import Dominio.Ciudad;
+
+public class ListaCiudad<T> extends Lista {
 
     private int cantMaxima;
 
@@ -21,6 +23,19 @@ public class ListaCiudad extends Lista {
 
     //==================================================//
     //===============  Métodos Complem.  ===============//
+    public Ciudad find(Ciudad element) {
+
+        NodoLista<Ciudad> aux = this.inicio;
+
+        while (aux != null && !aux.getElement().equals(element)) {
+            aux = aux.getNext();
+        }
+        if (aux != null) {
+            return aux.getElement();
+        } else {
+            return null;
+        }
+    }
 
     /*
 

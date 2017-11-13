@@ -1,14 +1,14 @@
 package Datos;
 
-public interface ILista extends Iterable<Object> {
+public interface ILista<T> extends Iterable<T> {
 
     public boolean isEmpty();
 
-    public void insert(Object element);
-    
-    public void delete(Object element);
+    public void insert(T element);
 
-    public Object find(Object element);
+    public void delete(T element);
+
+    public T find(T element);
 
     public void empty();
 

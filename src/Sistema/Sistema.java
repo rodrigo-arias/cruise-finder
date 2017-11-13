@@ -9,7 +9,7 @@ import Sistema.Retorno.Resultado;
 public class Sistema implements ISistema {
 
     //inicialización de lista de ciudades
-    private ListaCiudad ciudades;
+    private ListaCiudad<Ciudad> ciudades;
 
     //Pre: cantCiudades >= 0;
     //Post: Setea la cantidad de ciudades que se pueden ingresar
@@ -17,7 +17,7 @@ public class Sistema implements ISistema {
     public Retorno crearSistemaReservas(int cantCiudades) {
 
         Retorno ret = new Retorno();
-        ciudades = new ListaCiudad();
+        ciudades = new ListaCiudad<>();
 
         if (cantCiudades >= 0) {
             ciudades.setCantMaxima(cantCiudades);
@@ -35,7 +35,7 @@ public class Sistema implements ISistema {
 
         Retorno ret = new Retorno();
 
-        ciudades = new ListaCiudad();
+        ciudades = new ListaCiudad<>();
         System.gc();
         ret.resultado = Resultado.OK;
 
@@ -77,7 +77,7 @@ public class Sistema implements ISistema {
 
         Retorno ret = new Retorno();
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
 
         if (estrellas < 1 || estrellas > 5) {
             ret.resultado = Retorno.Resultado.ERROR_1;
@@ -89,12 +89,11 @@ public class Sistema implements ISistema {
             } else {
 
                 Crucero nuevo = new Crucero(nombre, ciudad, capacidad, estrellas);
-                Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(nuevo);
+                Crucero cruiseFound = cityFound.getCruceros().find(nuevo);
 
                 if (cruiseFound != null) {
                     ret.resultado = Resultado.ERROR_3;
                 } else {
-                    // INSERTAR ORDENADO POR RANKING
                     cityFound.getCruceros().insert(nuevo);
                     ret.resultado = Resultado.OK;
                 }
@@ -108,12 +107,12 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
@@ -136,12 +135,12 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
@@ -168,12 +167,12 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
@@ -204,12 +203,12 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
@@ -236,14 +235,14 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (ranking < 0 || ranking > 5) {
             ret.resultado = Retorno.Resultado.ERROR_1;
         } else if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
@@ -268,12 +267,12 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
         Crucero cruiseTemp = new Crucero(crucero);
 
         if (cityFound != null) {
 
-            Crucero cruiseFound = (Crucero) cityFound.getCruceros().find(cruiseTemp);
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
 
             if (cruiseFound != null) {
 
@@ -301,7 +300,7 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
 
         Ciudad cityTemp = new Ciudad(ciudad);
-        Ciudad cityFound = (Ciudad) ciudades.find(cityTemp);
+        Ciudad cityFound = ciudades.find(cityTemp);
 
         if (cityFound != null) {
 
@@ -323,8 +322,22 @@ public class Sistema implements ISistema {
     public Retorno listarCrucerosRankingAsc(String ciudad) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = ciudades.find(cityTemp);
 
+        if (cityFound != null) {
+
+            if (cityFound.getCruceros().isEmpty()) {
+                System.out.println("No hay registros de Cruceros en el sistema.");
+            } else {
+                System.out.println("Cruceros ordenados por ranking ascendente");
+                cityFound.listarCrucerosRankingAsc(cityFound.getCruceros().getInicio());
+            }
+            ret.resultado = Resultado.OK;
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+        }
         return ret;
     }
 
@@ -332,8 +345,22 @@ public class Sistema implements ISistema {
     public Retorno listarCrucerosRankingDesc(String ciudad) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = ciudades.find(cityTemp);
 
+        if (cityFound != null) {
+
+            if (cityFound.getCruceros().isEmpty()) {
+                System.out.println("No hay registros de Cruceros en el sistema.");
+            } else {
+                System.out.println("Cruceros ordenados por ranking descendente");
+                cityFound.listarCrucerosRankingDesc(cityFound.getCruceros().getInicio());
+            }
+            ret.resultado = Resultado.OK;
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+        }
         return ret;
     }
 
@@ -350,7 +377,30 @@ public class Sistema implements ISistema {
     public Retorno listarComentarios(String ciudad, String crucero) {
         Retorno ret = new Retorno();
 
-        ret.resultado = Resultado.NO_IMPLEMENTADA;
+        Ciudad cityTemp = new Ciudad(ciudad);
+        Ciudad cityFound = ciudades.find(cityTemp);
+        Crucero cruiseTemp = new Crucero(crucero);
+
+        if (cityFound != null) {
+
+            Crucero cruiseFound = cityFound.getCruceros().find(cruiseTemp);
+
+            if (cruiseFound != null) {
+
+                if (cruiseFound.getComentarios().isEmpty()) {
+                    System.out.println("No se han agregado comentarios al Crucero " + cruiseFound.getNombre() + " " + cityFound.getNombre());
+                } else {
+                    cruiseFound.listarComentarios();
+                }
+                ret.resultado = Resultado.OK;
+
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+            }
+
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_2;
+        }
 
         return ret;
     }

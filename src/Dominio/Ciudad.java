@@ -1,18 +1,18 @@
 package Dominio;
 
-import Datos.ILista;
 import Datos.ListaCrucero;
+import Datos.NodoLista;
 import java.util.Objects;
 
 public class Ciudad {
 
     private String nombre;
-    private ILista cruceros;
+    private ListaCrucero<Crucero> cruceros;
 
     //==================  Construct  ==================//
     public Ciudad(String nombre) {
         this.nombre = nombre;
-        this.cruceros = new ListaCrucero();
+        this.cruceros = new ListaCrucero<>();
     }
 
     //==================  Properties  =================//
@@ -24,11 +24,11 @@ public class Ciudad {
         this.nombre = nombre;
     }
 
-    public ILista getCruceros() {
+    public ListaCrucero<Crucero> getCruceros() {
         return cruceros;
     }
 
-    public void setCruceros(ILista cruceros) {
+    public void setCruceros(ListaCrucero<Crucero> cruceros) {
         this.cruceros = cruceros;
     }
 
@@ -59,6 +59,25 @@ public class Ciudad {
         for (Object element : cruceros) {
             System.out.println(element.toString());
         }
+    }
+
+    //Pre:
+    //Pos: muestra los datos de la lista en orden de enlace
+    public void listarCrucerosRankingAsc(NodoLista aux) {
+        if (aux != null) {
+            System.out.println(aux.getElement().toString());
+            listarCrucerosRankingAsc(aux.getNext());
+        }
+    }
+
+    //Pre:
+    //Pos: muestra los datos de la lista en orden inverso
+    public void listarCrucerosRankingDesc(NodoLista aux) {
+        if (aux != null) {
+            listarCrucerosRankingDesc(aux.getNext());
+            System.out.println(aux.getElement().toString());
+        }
+
     }
 
     @Override
