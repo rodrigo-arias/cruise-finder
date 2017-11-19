@@ -57,18 +57,19 @@ public abstract class Lista<T> implements ILista<T> {
     public void delete(T element) {
         if (inicio.getElement().equals(element)) {
             inicio = inicio.getNext();
+            this.cantElementos--;
         } else {
             NodoLista<T> aux = inicio;
             while (aux.getNext() != null) {
                 if (aux.getNext().getElement().equals(element)) {
                     aux.setNext(aux.getNext().getNext());
+                    this.cantElementos--;
                     return;
                 } else {
                     aux = aux.getNext();
                 }
             }
         }
-        this.cantElementos--;
     }
 
     //Pre:
@@ -133,5 +134,4 @@ public abstract class Lista<T> implements ILista<T> {
             }
         };
     }
-
 }

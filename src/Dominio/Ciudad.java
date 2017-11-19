@@ -1,7 +1,6 @@
 package Dominio;
 
 import Datos.ListaCrucero;
-import Datos.NodoLista;
 import java.util.Objects;
 
 public class Ciudad {
@@ -56,44 +55,10 @@ public class Ciudad {
     }
 
     public void listarCruceros() {
-        ListaCrucero<Crucero> temp = new ListaCrucero<>();
-
-        for (Object c : cruceros) {
-            temp.insert(c);
-        }
-
-        //ORDERNAR TEMP POR RANKING
-        Crucero prueba = new Crucero("Crucero Rodrigo");
-        temp.insert(prueba);
-
-        for (Object element : temp) {
-            System.out.println(element.toString());
-        }
-
-        System.out.println();
 
         for (Object element : cruceros) {
             System.out.println(element.toString());
         }
-    }
-
-    //Pre:
-    //Pos: muestra los datos de la lista en orden de enlace
-    public void listarCrucerosRankingAsc(NodoLista aux) {
-        if (aux != null) {
-            System.out.println(aux.getElement().toString());
-            listarCrucerosRankingAsc(aux.getNext());
-        }
-    }
-
-    //Pre:
-    //Pos: muestra los datos de la lista en orden inverso
-    public void listarCrucerosRankingDesc(NodoLista aux) {
-        if (aux != null) {
-            listarCrucerosRankingDesc(aux.getNext());
-            System.out.println(aux.getElement().toString());
-        }
-
     }
 
     @Override

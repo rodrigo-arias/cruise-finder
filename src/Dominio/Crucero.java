@@ -31,8 +31,9 @@ public class Crucero implements Comparable<Crucero> {
         this.disponibles = capacidad;
     }
 
-    public Crucero(String nombre) {
+    public Crucero(String nombre, String ciudad) {
         this.nombre = nombre;
+        this.ciudad = ciudad;
     }
 
     //==================  Properties  =================//
@@ -175,7 +176,11 @@ public class Crucero implements Comparable<Crucero> {
             if (other.nombre != null) {
                 return false;
             }
-        } else if (!nombre.toLowerCase().equals(other.nombre.toLowerCase())) {
+        } else if (ciudad == null) {
+            if (other.ciudad != null) {
+                return false;
+            }
+        } else if (!nombre.toLowerCase().equals(other.nombre.toLowerCase()) || !ciudad.toLowerCase().equals(other.ciudad.toLowerCase())) {
             return false;
         }
         return true;
