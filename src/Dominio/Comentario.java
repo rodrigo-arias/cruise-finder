@@ -29,6 +29,8 @@ public class Comentario {
     }
 
     //===================  Métodos  ===================//
+    //Pre:
+    //Pos:
     @Override
     public String toString() {
         return this.comentario + " - " + this.ranking;

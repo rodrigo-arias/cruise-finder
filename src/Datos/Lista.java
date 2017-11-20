@@ -23,10 +23,10 @@ public abstract class Lista<T> implements ILista<T> {
     public void setCantElementos(int cantElementos) {
         this.cantElementos = cantElementos;
     }
+
     //================  Métodos Básicos  ===============//
     //Pre:
     //Post: Retorna true si la lista no tiene nodos
-
     @Override
     public boolean isEmpty() {
         return this.inicio == null;
@@ -51,8 +51,8 @@ public abstract class Lista<T> implements ILista<T> {
         this.cantElementos++;
     }
 
-//Pre:
-//Pos: Elimina el elemento de la lista
+    //Pre:
+    //Pos: Elimina el elemento de la lista
     @Override
     public void delete(T element) {
         if (inicio.getElement().equals(element)) {
@@ -93,7 +93,7 @@ public abstract class Lista<T> implements ILista<T> {
 
             while (aux != null) {
                 if (aux.getNext() != null) {
-                    System.out.print(aux.toString() + " - ");
+                    System.out.print(aux.toString() + "|");
                 } else {
                     System.out.println(aux.toString());
                 }

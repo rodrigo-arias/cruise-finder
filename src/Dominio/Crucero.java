@@ -2,6 +2,7 @@ package Dominio;
 
 import Datos.Cola;
 import Datos.ListaGenerica;
+import Datos.ListaReserva;
 import java.util.Objects;
 
 public class Crucero implements Comparable<Crucero> {
@@ -13,7 +14,7 @@ public class Crucero implements Comparable<Crucero> {
     private int ranking;
     private ListaGenerica servicios;
     private ListaGenerica comentarios;
-    private ListaGenerica reservas;
+    private ListaReserva reservas;
     private Cola esperas;
     private int disponibles;
 
@@ -26,7 +27,7 @@ public class Crucero implements Comparable<Crucero> {
         this.ranking = 0;
         this.servicios = new ListaGenerica();
         this.comentarios = new ListaGenerica();
-        this.reservas = new ListaGenerica();
+        this.reservas = new ListaReserva();
         this.esperas = new Cola();
         this.disponibles = capacidad;
     }
@@ -93,11 +94,11 @@ public class Crucero implements Comparable<Crucero> {
         this.comentarios = comentarios;
     }
 
-    public ListaGenerica getReservas() {
+    public ListaReserva getReservas() {
         return reservas;
     }
 
-    public void setReservas(ListaGenerica reservas) {
+    public void setReservas(ListaReserva reservas) {
         this.reservas = reservas;
     }
 
@@ -118,6 +119,8 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //===================  Métodos  ===================//
+    //Pre:
+    //Pos:
     public void actualizarRanking() {
         int total = 0;
         int comments = 0;
@@ -132,6 +135,8 @@ public class Crucero implements Comparable<Crucero> {
         this.ranking = total / comments;
     }
 
+    //Pre:
+    //Pos:
     public void eliminarReserva(int cliente) {
         this.reservas.delete(cliente);
         this.disponibles++;
@@ -144,6 +149,8 @@ public class Crucero implements Comparable<Crucero> {
         }
     }
 
+    //Pre:
+    //Pos:
     public void listarServicios() {
         int num = 1;
         for (Object element : servicios) {
@@ -152,6 +159,8 @@ public class Crucero implements Comparable<Crucero> {
         }
     }
 
+    //Pre:
+    //Pos:
     public void listarComentarios() {
         int num = 1;
         for (Object element : comentarios) {
@@ -160,6 +169,23 @@ public class Crucero implements Comparable<Crucero> {
         }
     }
 
+    //Pre:
+    //Pos:
+    @Override
+    public String toString() {
+        return this.nombre + " " + this.estrellas + " " + this.ranking;
+    }
+
+    //Pre:
+    //Pos:
+    @Override
+    public int compareTo(Crucero element) {
+        Crucero other = element;
+        return this.nombre.compareTo(other.nombre);
+    }
+
+    //Pre:
+    //Pos:
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -191,16 +217,5 @@ public class Crucero implements Comparable<Crucero> {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode(this.nombre.toLowerCase());
         return hash;
-    }
-
-    @Override
-    public String toString() {
-        return this.nombre + " " + this.estrellas + " " + this.ranking;
-    }
-
-    @Override
-    public int compareTo(Crucero element) {
-        Crucero other = element;
-        return this.nombre.compareTo(other.nombre);
     }
 }

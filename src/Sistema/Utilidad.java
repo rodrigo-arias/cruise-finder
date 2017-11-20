@@ -6,14 +6,20 @@ import Dominio.Crucero;
 
 public class Utilidad {
 
+    //Pre:
+    //Pos:
     public Retorno.Resultado retornarResultado(Retorno metodo) {
         return metodo.resultado;
     }
 
+    //Pre:
+    //Pos:
     public void insertarIndiceRanking(ListaIndice<Crucero> indice, Crucero nuevo) {
         indice.insert(nuevo);
     }
 
+    //Pre:
+    //Pos:
     public void actualizarIndiceRanking(ListaIndice<Crucero> indice, Crucero cruise) {
         indice.delete(cruise);
         indice.insert(cruise);

@@ -25,11 +25,15 @@ public class Cola implements ICola {
     }
 
     //================  Métodos Básicos  ===============//
+    //Pre:
+    //Pos:
     @Override
     public boolean isEmpty() {
         return this.inicio == null;
     }
 
+    //Pre:
+    //Pos:
     @Override
     public void insert(Object element) {
 
@@ -46,6 +50,8 @@ public class Cola implements ICola {
         this.cantElementos++;
     }
 
+    //Pre:
+    //Pos:
     @Override
     public void delete(Object element) {
         if (inicio.getElement().equals(element)) {
@@ -74,6 +80,8 @@ public class Cola implements ICola {
         this.cantElementos--;
     }
 
+    //Pre:
+    //Pos:
     @Override
     public void empty() {
         inicio = inicio.getNext();
@@ -83,6 +91,8 @@ public class Cola implements ICola {
         this.cantElementos = 0;
     }
 
+    //Pre:
+    //Pos:
     @Override
     public Object find(Object element) {
 
@@ -106,18 +116,21 @@ public class Cola implements ICola {
             System.out.println("La cola está vacía");
         } else {
             NodoCola aux = this.inicio;
+            System.out.print("Cola de espera en el crucero ");
 
             while (aux != null) {
                 if (aux.getNext() != null) {
-                    System.out.print(aux.getElement().toString() + " - ");
+                    System.out.print(aux.getElement() + "|");
                 } else {
-                    System.out.println(aux.getElement().toString());
+                    System.out.println(aux.getElement());
                 }
                 aux = aux.getNext();
             }
         }
     }
 
+    //Pre:
+    //Pos:
     public Object first() {
         return this.inicio.getElement();
     }

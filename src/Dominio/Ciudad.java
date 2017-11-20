@@ -32,6 +32,24 @@ public class Ciudad {
     }
 
     //===================  Métodos  ===================//
+    //Pre:
+    //Pos:
+    public void listarCruceros() {
+
+        for (Object element : cruceros) {
+            System.out.println(element.toString());
+        }
+    }
+
+    //Pre:
+    //Pos:
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
+    //Pre:
+    //Pos:
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -54,22 +72,10 @@ public class Ciudad {
         return true;
     }
 
-    public void listarCruceros() {
-
-        for (Object element : cruceros) {
-            System.out.println(element.toString());
-        }
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.nombre);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.nombre);
         return hash;
-    }
-
-    @Override
-    public String toString() {
-        return this.nombre;
     }
 }

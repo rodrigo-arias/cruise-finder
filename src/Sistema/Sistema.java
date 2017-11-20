@@ -419,6 +419,7 @@ public class Sistema implements ISistema {
             System.out.println("Cruceros ordenados por ranking");
 
             utils.listarIndiceRanking(indices.getInicio());
+            System.out.println();
         }
         ret.resultado = Resultado.OK;
 
@@ -443,10 +444,10 @@ public class Sistema implements ISistema {
             if (cruisefound != null) {
 
                 if (cruisefound.getComentarios().isEmpty()) {
-                    System.out.println("No se han agregado comentarios al  servicios registrados en el Crucero " + cruisefound.getNombre() + " " + cityfound.getNombre());
+                    System.out.println("No se han agregado comentarios al Crucero " + cruisefound.getNombre() + " " + cityfound.getNombre());
                 } else {
                     System.out.println("Servicios del Crucero " + cruisefound.getNombre() + " " + cityfound.getNombre());
-                    cruisefound.listarServicios();
+                    cruisefound.listarComentarios();
                 }
                 ret.resultado = Resultado.OK;
 
@@ -467,7 +468,7 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno();
         matriz = new int[dimension][dimension];
 
-        if (ciudades[0].length == dimension) {
+        if (ciudades[0].length == dimension && ciudades.length == dimension) {
 
             matriz = ciudades;
 
@@ -491,17 +492,16 @@ public class Sistema implements ISistema {
 
         if (o == -1) {
             ret.resultado = Resultado.ERROR_1;
-            ret.valorString = "La ciudad origen no existe en el sistema";
+            System.out.println("La ciudad origen no existe en el sistema");
 
         } else if (d == -1) {
             ret.resultado = Resultado.ERROR_2;
-            ret.valorString = "La ciudad destino no existe en el sistema";
+            System.out.println("La ciudad destino no existe en el sistema");
         } else if (o == d) {
             ret.resultado = Resultado.ERROR_3;
-            ret.valorString = "Ingrese una ciudad origen y destino distintas";
+            System.out.println("Ingrese una ciudad origen y destino distintas");
         } else {
 
-            String camino;
             int columnas = matriz[0].length;
             int escala = 0;
             int distancia = Integer.MAX_VALUE;
@@ -516,11 +516,10 @@ public class Sistema implements ISistema {
             }
 
             if (matriz[o][d] != 0 && distancia > matriz[o][d]) {
-                camino = "El camino es directo " + ciudades.findByIndex(o) + " a " + ciudades.findByIndex(d) + " distancia " + matriz[o][d];
+                System.out.println("El camino es directo " + ciudades.findByIndex(o) + " a " + ciudades.findByIndex(d) + " distancia " + matriz[o][d]);
             } else {
-                camino = "El camino mas corto es " + ciudades.findByIndex(o) + " - " + ciudades.findByIndex(escala) + " - " + ciudades.findByIndex(d);
+                System.out.println("El camino mas corto es " + ciudades.findByIndex(o) + " - " + ciudades.findByIndex(escala) + " - " + ciudades.findByIndex(d));
             }
-            ret.valorString = camino;
             ret.resultado = Resultado.OK;
         }
         return ret;

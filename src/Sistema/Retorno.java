@@ -9,5 +9,4 @@ public class Retorno {
     int valorEntero;
     String valorString;
     Resultado resultado;
-
 }

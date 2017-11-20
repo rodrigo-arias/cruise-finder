@@ -32,5 +32,4 @@ public class NodoCola {
     public void setNext(NodoCola next) {
         this.next = next;
     }
-
 }

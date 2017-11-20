@@ -15,6 +15,8 @@ public class ListaCrucero<T> extends Lista {
     }
 
     //===============  Métodos Complem.  ===============//
+    //Pre:
+    //Pos:
     public Crucero find(Crucero element) {
 
         NodoLista<Crucero> aux = this.inicio;
@@ -35,17 +37,15 @@ public class ListaCrucero<T> extends Lista {
 
         NodoLista<Crucero> aux = this.inicio;
 
-        //Primer elemento
         if (this.isEmpty()) {
             NodoLista<Crucero> nuevo = new NodoLista(element);
             this.inicio = this.fin = nuevo;
 
-            //Es menor al inicio
         } else if (aux.getElement().compareTo(element) >= 0) {
             this.inicio = new NodoLista(element, inicio);
 
         } else {
-            //Busco el final o el siguiente mayor
+
             while (aux.getNext() != null && aux.getNext().getElement().compareTo(element) < 0) {
                 aux = aux.getNext();
             }
