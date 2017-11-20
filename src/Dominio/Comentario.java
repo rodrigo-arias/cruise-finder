@@ -30,7 +30,7 @@ public class Comentario {
 
     //===================  Métodos  ===================//
     //Pre:
-    //Pos:
+    //Pos: imprime el comentario y su ranking
     @Override
     public String toString() {
         return this.comentario + " - " + this.ranking;

@@ -16,7 +16,7 @@ public class ListaIndice<T> extends Lista {
 
     //===============  Métodos Complem.  ===============//
     //Pre:
-    //Pos: Agrega un nuevo Nodo al final de la lista
+    //Pos: agrega el crucero a la lista por ranking descendente
     public void insert(Crucero element) {
 
         NodoLista<Crucero> aux = this.inicio;

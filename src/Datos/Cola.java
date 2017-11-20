@@ -26,14 +26,14 @@ public class Cola implements ICola {
 
     //================  Métodos Básicos  ===============//
     //Pre:
-    //Pos:
+    //Pos: retorna true si el inicio de la lista es null
     @Override
     public boolean isEmpty() {
         return this.inicio == null;
     }
 
     //Pre:
-    //Pos:
+    //Pos: agrega el elemento al final de la cola
     @Override
     public void insert(Object element) {
 
@@ -51,7 +51,7 @@ public class Cola implements ICola {
     }
 
     //Pre:
-    //Pos:
+    //Pos: borra el elemento del inicio de la cola
     @Override
     public void delete(Object element) {
         if (inicio.getElement().equals(element)) {
@@ -81,7 +81,7 @@ public class Cola implements ICola {
     }
 
     //Pre:
-    //Pos:
+    //Pos: elimina todos los nodos de la cola
     @Override
     public void empty() {
         inicio = inicio.getNext();
@@ -92,7 +92,7 @@ public class Cola implements ICola {
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna el objecto si lo encuentra en la cola, sino retorna null
     @Override
     public Object find(Object element) {
 
@@ -109,7 +109,7 @@ public class Cola implements ICola {
     }
 
     //Pre:
-    //Pos: Recorre y muestra los datos de lista
+    //Pos: recorre los elementos e imprime sus datos
     @Override
     public void show() {
         if (this.isEmpty()) {
@@ -130,7 +130,7 @@ public class Cola implements ICola {
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna el primer nodo de la cola
     public Object first() {
         return this.inicio.getElement();
     }

@@ -3,7 +3,7 @@ package Sistema;
 import Dominio.Ciudad;
 import Dominio.Crucero;
 
-public class CruiseFind {
+public class Main {
 
     public static void main(String[] args) {
 

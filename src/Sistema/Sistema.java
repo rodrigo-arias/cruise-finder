@@ -9,7 +9,7 @@ import Sistema.Retorno.Resultado;
 
 public class Sistema implements ISistema {
 
-    //Inicialización de lista de ciudades e índice por ranking
+    //Inicialización de variables de sistema
     protected ListaCiudad<Ciudad> ciudades;
     protected ListaIndice<Crucero> indices;
     protected int dimension;
@@ -17,8 +17,8 @@ public class Sistema implements ISistema {
 
     Utilidad utils = new Utilidad();
 
-    //Pre: cantCiudades >= 0;
-    //Post: Setea la cantidad de ciudades que se pueden ingresar
+    //Pre:
+    //Post: determina limite de ciudades del sistema | inicializa listas del sistema
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
 
@@ -38,7 +38,7 @@ public class Sistema implements ISistema {
     }
 
     //Pre:
-    //Post: Se destruyen la lista ciudades
+    //Post: reinicia las variables del sistema
     @Override
     public Retorno destruirSistemaReservas() {
 
@@ -47,6 +47,7 @@ public class Sistema implements ISistema {
         ciudades = new ListaCiudad<>();
         indices = new ListaIndice<>();
         dimension = 0;
+        matriz = null;
         System.gc();
 
         ret.resultado = Resultado.OK;
@@ -54,8 +55,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre: ciudad != ""
-    //Post: Agrega la ciudad al inicio de la lista de ciudades
+    //Pre: sistema creado | ciudad != ""
+    //Post: agrega la ciudad al inicio de la lista de ciudades
     @Override
     public Retorno registrarCiudad(String ciudad) {
 
@@ -69,20 +70,17 @@ public class Sistema implements ISistema {
 
                 ciudades.insert(nueva);
                 ret.resultado = Resultado.OK;
-
             } else {
                 ret.resultado = Resultado.ERROR_1;
-
             }
-
         } else {
             ret.resultado = Resultado.ERROR_2;
         }
         return ret;
     }
 
-    //Pre: ciudad != "", nombre != ""
-    //Post: Agrega el crucero al inicio de la lista de cruceros de la ciudad y con raking 0 en el sistema de reservas
+    //Pre: sistema creado | ciudad != "" | nombre != ""
+    //Post: agrega el crucero al inicio de la lista de cruceros de la ciudad con raking 0
     @Override
     public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
 
@@ -116,8 +114,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado | ciudad =! "" | nombre != "" | servicio != ""
+    //Post: agrega el servicio al inicio de la lista de servicios del crucero para la ciudad
     @Override
     public Retorno ingresarServicio(String ciudad, String crucero, String servicio) {
 
@@ -146,8 +144,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: borra el servicio de la lista de servicios del crucero para la ciudad
     @Override
     public Retorno borrarServicio(String ciudad, String crucero, String servicio) {
 
@@ -181,8 +179,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado | ciudad =! "" | crucero =! ""
+    //Post: agrega el cliente a la lista de reservas o cola de espera del crucero para la ciudad
     @Override
     public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
 
@@ -220,8 +218,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: borra el cliente de la lista de reservas y agrega si hay, al primer cliente en cola de espera
     @Override
     public Retorno cancelarReserva(int cliente, String ciudad, String crucero) {
 
@@ -251,12 +249,11 @@ public class Sistema implements ISistema {
         } else {
             ret.resultado = Retorno.Resultado.ERROR_3;
         }
-
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado | ciudad =! "" | crucero =! "" | comentario != ""
+    //Post: agrega un comentario en el crucero para la ciudad y reordena el índice por ranking
     @Override
     public Retorno ingresarComentario(String ciudad, String crucero, String comentario, int ranking) {
 
@@ -291,8 +288,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: lista los servicios del crucero para la ciudad, numerados del mas reciente al mas antiguo
     @Override
     public Retorno listarServicios(String ciudad, String crucero) {
 
@@ -327,8 +324,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: lista los curceros de la ciudad por orden alfábetico con nombre, estrellas y ranking
     @Override
     public Retorno listarCrucerosCiudad(String ciudad) {
 
@@ -353,8 +350,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: lista los cruceros de la ciudad por orden de ranking ascendente con nombre y ranking
     @Override
     public Retorno listarCrucerosRankingAsc(String ciudad) {
 
@@ -380,8 +377,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: lista los cruceros de la ciudad por orden de ranking descendente con nombre y ranking
     @Override
     public Retorno listarCrucerosRankingDesc(String ciudad) {
 
@@ -407,8 +404,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: lista los cruceros del sistema por orden de ranking descendente con ciudad, nombre y ranking
     @Override
     public Retorno listarCrucerosRanking() {
         Retorno ret = new Retorno();
@@ -426,8 +423,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre:
-    //Post:
+    //Pre: sistema creado
+    //Post: lista los comentarios del crucero para la ciudad, numerados del mas reciente al mas antiguo
     @Override
     public Retorno listarComentarios(String ciudad, String crucero) {
 
@@ -460,8 +457,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre: el orden de la matriz debe coincidir con el de las ciudades del sistema
-    //Post:
+    //Pre: sistema creado | el orden de la matriz debe coincidir con el de las ciudades del sistema
+    //Post: carga la matriz del sistema con las distancias de las ciudades
     @Override
     public Retorno cargarDistancias(int[][] ciudades) {
 
@@ -480,7 +477,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    //Pre: la lista de ciudades no puede estar vacía
+    //Pre: sistema creado | lista de ciudades != null | matriz con distancias cargadas
     //Post:
     @Override
     public Retorno buscarCamino(String origen, String destino) {

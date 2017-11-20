@@ -120,7 +120,7 @@ public class Crucero implements Comparable<Crucero> {
 
     //===================  Métodos  ===================//
     //Pre:
-    //Pos:
+    //Pos: actualiza el ranking del crucero como promedio de todos los rankings de comentarios
     public void actualizarRanking() {
         int total = 0;
         int comments = 0;
@@ -136,7 +136,7 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //Pre:
-    //Pos:
+    //Pos: elimina al cliente de la lista de reservas y agrega al primero de la cola de esperas si existe
     public void eliminarReserva(int cliente) {
         this.reservas.delete(cliente);
         this.disponibles++;
@@ -150,7 +150,7 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //Pre:
-    //Pos:
+    //Pos: recorre la lista de servicios e imprime número y nombre
     public void listarServicios() {
         int num = 1;
         for (Object element : servicios) {
@@ -160,7 +160,7 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //Pre:
-    //Pos:
+    //Pos: recorre la lista de cruceros e imprime sus número y comentario
     public void listarComentarios() {
         int num = 1;
         for (Object element : comentarios) {
@@ -170,14 +170,14 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //Pre:
-    //Pos:
+    //Pos: imprime nombre, estrellas y ranking
     @Override
     public String toString() {
         return this.nombre + " " + this.estrellas + " " + this.ranking;
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna 0 si el crucero tiene el mismo nombre al comparado < 0 si tiene otro nombre
     @Override
     public int compareTo(Crucero element) {
         Crucero other = element;
@@ -185,7 +185,7 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna true si las ciudades y el crucero tienen el mismo nombre
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

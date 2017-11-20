@@ -23,7 +23,7 @@ public class ListaCiudad<T> extends Lista {
 
     //===============  Métodos Complem.  ===============//
     //Pre:
-    //Pos:
+    //Pos: retorna la ciudad si la encuentra en la lista, sino retorna null
     public Ciudad find(Ciudad element) {
 
         NodoLista<Ciudad> aux = this.inicio;
@@ -39,7 +39,7 @@ public class ListaCiudad<T> extends Lista {
     }
 
     //Pre:
-    //Pos:
+    //Pos: recorre la lista de ciudades e imprime su nombre
     @Override
     public void show() {
         if (this.isEmpty()) {
@@ -59,7 +59,7 @@ public class ListaCiudad<T> extends Lista {
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna el índice de la ciudad en la lista, sino retorna -1
     public int findIndex(String ciudad) {
 
         NodoLista<Ciudad> aux = this.inicio;
@@ -81,7 +81,7 @@ public class ListaCiudad<T> extends Lista {
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna el nombre de la ciudad si encuentra el índice, sino retorna vacío
     public String findByIndex(int index) {
 
         NodoLista<Ciudad> aux = this.inicio;

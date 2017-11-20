@@ -33,7 +33,7 @@ public class Ciudad {
 
     //===================  Métodos  ===================//
     //Pre:
-    //Pos:
+    //Pos: recorre la lista de cruceros e imprime sus nombres, estrellas y ranking
     public void listarCruceros() {
 
         for (Object element : cruceros) {
@@ -42,14 +42,14 @@ public class Ciudad {
     }
 
     //Pre:
-    //Pos:
+    //Pos: imprime el nombre de la ciudad
     @Override
     public String toString() {
         return this.nombre;
     }
 
     //Pre:
-    //Pos:
+    //Pos: retorna true si las ciudades tienen el mismo nombre
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

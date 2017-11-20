@@ -26,17 +26,16 @@ public abstract class Lista<T> implements ILista<T> {
 
     //================  Métodos Básicos  ===============//
     //Pre:
-    //Post: Retorna true si la lista no tiene nodos
+    //Post: retorna true si el inicio de la cola es null
     @Override
     public boolean isEmpty() {
         return this.inicio == null;
     }
 
     //Pre:
-    //Pos: Agrega un nuevo Nodo al final de la lista
+    //Pos: agrega el elemento al inicio de la lista
     @Override
     public void insert(T element) {
-        //inicio = new NodoLista<>(element, this.inicio);
 
         NodoLista<T> nuevo = new NodoLista<>(element);
 
@@ -52,7 +51,7 @@ public abstract class Lista<T> implements ILista<T> {
     }
 
     //Pre:
-    //Pos: Elimina el elemento de la lista
+    //Pos: borra el elemento de la lista
     @Override
     public void delete(T element) {
         if (inicio.getElement().equals(element)) {
@@ -73,7 +72,7 @@ public abstract class Lista<T> implements ILista<T> {
     }
 
     //Pre:
-    //Pos: Elimina todos los nodos de una lista dada
+    //Pos: elimina todos los nodos de la lista
     @Override
     public void empty() {
         while (inicio != null) {
@@ -83,7 +82,24 @@ public abstract class Lista<T> implements ILista<T> {
     }
 
     //Pre:
-    //Pos: Recorre y muestra los datos de lista
+    //Pos: retorna el objecto si lo encuentra en la cola, de lo contrario null
+    @Override
+    public T find(T element) {
+
+        NodoLista<T> aux = this.inicio;
+
+        while (aux != null && !aux.getElement().equals(element)) {
+            aux = aux.getNext();
+        }
+        if (aux != null) {
+            return aux.getElement();
+        } else {
+            return null;
+        }
+    }
+
+    //Pre:
+    //Pos: recorre los elementos e imprime sus datos
     @Override
     public void show() {
         if (this.isEmpty()) {
@@ -99,23 +115,6 @@ public abstract class Lista<T> implements ILista<T> {
                 }
                 aux = aux.getNext();
             }
-        }
-    }
-
-    //Pre:
-    //Pos: Retorna true si encontró una coincidencia, false si no la encontró
-    @Override
-    public T find(T element) {
-
-        NodoLista<T> aux = this.inicio;
-
-        while (aux != null && !aux.getElement().equals(element)) {
-            aux = aux.getNext();
-        }
-        if (aux != null) {
-            return aux.getElement();
-        } else {
-            return null;
         }
     }
 

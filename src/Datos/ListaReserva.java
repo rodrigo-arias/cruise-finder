@@ -9,7 +9,7 @@ public class ListaReserva<String> extends Lista {
 
     //===============  Métodos Complem.  ===============//
     //Pre:
-    //Pos:
+    //Pos: recorre la lista de reservas e imprime sus datos
     @Override
     public void show() {
         if (this.isEmpty()) {

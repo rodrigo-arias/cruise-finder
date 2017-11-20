@@ -16,7 +16,7 @@ public class ListaCrucero<T> extends Lista {
 
     //===============  Métodos Complem.  ===============//
     //Pre:
-    //Pos:
+    //Pos: retorna el crucero si lo encuentra en la lista, sino retorna null
     public Crucero find(Crucero element) {
 
         NodoLista<Crucero> aux = this.inicio;
@@ -32,7 +32,7 @@ public class ListaCrucero<T> extends Lista {
     }
 
     //Pre:
-    //Pos: Agrega un nuevo Nodo al final de la lista
+    //Pos: agrega el crucero a la lista en orden alfabético
     public void insert(Crucero element) {
 
         NodoLista<Crucero> aux = this.inicio;
