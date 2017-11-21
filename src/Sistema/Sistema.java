@@ -10,8 +10,8 @@ import Sistema.Retorno.Resultado;
 public class Sistema implements ISistema {
 
     //Inicialización de variables de sistema
-    protected ListaCiudad<Ciudad> ciudades;
-    protected ListaIndice<Crucero> indices;
+    public ListaCiudad<Ciudad> ciudades;
+    public ListaIndice<Crucero> indices;
     protected int dimension;
     protected int matriz[][];
 
@@ -235,17 +235,22 @@ public class Sistema implements ISistema {
 
             if (cruisefound != null) {
 
-                if (cruisefound.getReservas().find(cliente) != null) {
+                if (!cruisefound.getReservas().isEmpty() && cruisefound.getReservas().find(cliente) != null) {
+
                     cruisefound.eliminarReserva(cliente);
                     ret.resultado = Resultado.OK;
+
+                } else if (!cruisefound.getEsperas().isEmpty() && cruisefound.getEsperas().find(cliente) != null) {
+
+                    cruisefound.eliminarEspera(cliente);
+                    ret.resultado = Resultado.OK;
+
                 } else {
                     ret.resultado = Resultado.ERROR_2;
                 }
-
             } else {
                 ret.resultado = Retorno.Resultado.ERROR_1;
             }
-
         } else {
             ret.resultado = Retorno.Resultado.ERROR_3;
         }

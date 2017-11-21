@@ -55,7 +55,7 @@ public class Main {
 
         //1.6.Borrar Servicio
         p.ver(s.borrarServicio("Montevideo", "Royal Caribbean Int.", "Piscina"), Retorno.Resultado.OK, "Se eliminó Piscina como servicio del Royal Caribbean Int. de Montevideo");
-        p.ver(s.ingresarServicio("Montevideo", "Carnival Cruise Lines", "Masajes"), Retorno.Resultado.ERROR_1, "No existe el crucero en Montevideo");
+        p.ver(s.borrarServicio("Montevideo", "Carnival Cruise Lines", "Masajes"), Retorno.Resultado.ERROR_1, "No existe el crucero en Montevideo");
         p.ver(s.borrarServicio("Montevideo", "Royal Caribbean Int.", "Pensión completa"), Retorno.Resultado.ERROR_2, "No existe el servicio");
         p.ver(s.borrarServicio("Buenos Aires", "Royal Caribbean Int.", "Piscina"), Retorno.Resultado.ERROR_3, "No existe la ciudad en el sistema");
         p.ver(s.listarServicios("Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Listado de servicios de Royal Caribbean Int. en Santiago");

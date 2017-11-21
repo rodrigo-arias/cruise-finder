@@ -150,6 +150,12 @@ public class Crucero implements Comparable<Crucero> {
     }
 
     //Pre:
+    //Pos: elimina al cliente de la cola de espera
+    public void eliminarEspera(int cliente) {
+        this.esperas.delete(cliente);
+    }
+
+    //Pre:
     //Pos: recorre la lista de servicios e imprime número y nombre
     public void listarServicios() {
         int num = 1;
