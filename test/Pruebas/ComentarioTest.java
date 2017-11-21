@@ -5,16 +5,23 @@ import Sistema.Sistema;
 import Sistema.Utilidad;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 public class ComentarioTest {
 
-    Utilidad u = new Utilidad();
-    Sistema s = new Sistema();
+    private Utilidad u;
+    private Sistema s;
+
+    @Before
+    public void setUp() throws Exception {
+        s = new Sistema();
+        u = new Utilidad();
+        s.crearSistemaReservas(6);
+    }
 
     @Test
     public void registrarCiudad() {
-        s.crearSistemaReservas(6);
-        assertEquals(Retorno.Resultado.OK, u.retornarResultado(s.registrarCiudad("Montevideo")));
+        assertEquals(Retorno.Resultado.OK, s.registrarCiudad("Montevideo").resultado);
     }
 }
 

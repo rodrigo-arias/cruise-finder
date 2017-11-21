@@ -15,6 +15,14 @@ public abstract class Lista<T> implements ILista<T> {
         this.cantElementos = 0;
     }
 
+    public NodoLista<T> getInicio() {
+        return inicio;
+    }
+
+    public NodoLista<T> getFin() {
+        return fin;
+    }
+
     //==================  Properties  =================//
     public int getCantElementos() {
         return cantElementos;
@@ -116,6 +124,18 @@ public abstract class Lista<T> implements ILista<T> {
                 aux = aux.getNext();
             }
         }
+    }
+
+    public String toString() {
+        String ret = "";
+        for (Object element : this) {
+            if (this.fin.getElement().toString().compareTo(element.toString()) == 0) {
+                ret += element.toString();
+            } else {
+                ret += element.toString() + "|";
+            }
+        }
+        return ret;
     }
 
     public Iterator<T> iterator() {

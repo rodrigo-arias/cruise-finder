@@ -105,6 +105,7 @@ public class Sistema implements ISistema {
                     ret.resultado = Resultado.ERROR_3;
                 } else {
                     cityfound.getCruceros().insert(nuevo);
+                    ret.valorString = nuevo.toString();
                     ret.resultado = Resultado.OK;
 
                     utils.insertarIndiceRanking(indices, nuevo);
@@ -132,6 +133,7 @@ public class Sistema implements ISistema {
             if (cruisefound != null) {
 
                 cruisefound.getServicios().insert(servicio);
+                ret.valorString=servicio;
                 ret.resultado = Resultado.OK;
 
             } else {
@@ -163,6 +165,7 @@ public class Sistema implements ISistema {
 
                 if (cruisefound.getServicios().find(servicio) != null) {
                     cruisefound.getServicios().delete(servicio);
+                    ret.valorString=servicio;
                     ret.resultado = Resultado.OK;
                 } else {
                     ret.resultado = Resultado.ERROR_2;
@@ -316,6 +319,7 @@ public class Sistema implements ISistema {
                     System.out.println("Servicios del Crucero " + cruisefound.getNombre() + " " + cityfound.getNombre());
                     cruisefound.listarServicios();
                 }
+                ret.valorString = cruisefound.getServicios().toString();
                 ret.resultado = Resultado.OK;
 
             } else {
@@ -347,6 +351,7 @@ public class Sistema implements ISistema {
                 System.out.println("Cruceros en " + cityfound.getNombre());
                 cityfound.listarCruceros();
             }
+            ret.valorString = cityfound.retornarCruceros();
             ret.resultado = Resultado.OK;
 
         } else {
@@ -485,7 +490,7 @@ public class Sistema implements ISistema {
     //Pre: sistema creado | lista de ciudades != null | matriz con distancias cargadas
     //Post:
     @Override
-    public Retorno buscarCamino(String origen, String destino) {
+    public Retorno buscarCamino(int [][] matriz, String origen, String destino) {
 
         Retorno ret = new Retorno();
 

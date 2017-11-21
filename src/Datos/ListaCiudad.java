@@ -1,6 +1,7 @@
 package Datos;
 
 import Dominio.Ciudad;
+import Dominio.Crucero;
 
 public class ListaCiudad<T> extends Lista {
 

@@ -6,12 +6,6 @@ import Dominio.Crucero;
 
 public class Utilidad {
 
-    //Pre:
-    //Pos: retorna el resutado del retorno para el método dado
-    public Retorno.Resultado retornarResultado(Retorno metodo) {
-        return metodo.resultado;
-    }
-
     //Pre: el crucero no debe encontrarse en la lista
     //Pos: inserta el crucero en la lista por orden de ranking descendente
     public void insertarIndiceRanking(ListaIndice<Crucero> indice, Crucero nuevo) {

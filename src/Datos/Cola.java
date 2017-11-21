@@ -150,4 +150,16 @@ public class Cola implements ICola {
             }
         };
     }
+    
+        public String toString() {
+        String ret = "";
+        for (Object element : this) {
+            if (this.fin.getElement().toString().compareTo(element.toString()) == 0) {
+                ret += element.toString();
+            } else {
+                ret += element.toString() + "|";
+            }
+        }
+        return ret;
+    }
 }

@@ -34,6 +34,6 @@ public interface ISistema {
 
     Retorno cargarDistancias(int[][] ciudades);
 
-    Retorno buscarCamino(String origen, String destino);
+    Retorno buscarCamino(int [][] m, String origen, String destino);
 
 }
