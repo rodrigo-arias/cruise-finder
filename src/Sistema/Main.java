@@ -135,9 +135,24 @@ public class Main {
         p.ver(s.listarComentarios("Montevideo", "Royal Caribbean Int."), Retorno.Resultado.OK, "Se listan los serivios del Royal Caribbean Int. en Montevideo");
 
         //2.1.Cargar Matriz de Distancias
-        int[][] matrizError = {{0, 10, 25, 15, 30, 0}};
-        int[][] matrizDistance = {{0, 10, 25, 15, 30, 0}, {10, 0, 20, 0, 0, 0}, {25, 20, 0, 0, 0, 40}, {15, 0, 0, 0, 0, 45}, {30, 0, 0, 0, 0, 25}, {0, 0, 40, 45, 25, 0}};
-        /* nota: última ciudad ingresada corresponde al primer elemento de la matriz */
+        int[][] matrizError = {
+            {0, 10, 25, 15, 30, 0},
+            {10, 0, 20, 0, 0, 0},
+            {25, 20, 0, 0, 0, 40},
+            {15, 0, 0, 0, 0, 45},
+            {30, 0, 0, 0, 0, 25},
+            {0, 0, 40, 45, 25, 0},
+            {0, 0, 0, 0, 0, 0}};
+
+        int[][] matrizDistance = {
+            {0, 10, 25, 15, 30, 0},
+            {10, 0, 20, 0, 0, 0},
+            {25, 20, 0, 0, 0, 40},
+            {15, 0, 0, 0, 0, 45},
+            {30, 0, 0, 0, 0, 25},
+            {0, 0, 40, 45, 25, 0}};
+
+        /* nota: la matriz debe cargarse en el orden de registro de las ciudades */
         p.ver(s.cargarDistancias(matrizError), Retorno.Resultado.ERROR_1, "La dimensión de la matriz no coincide con la cantidad de ciudades del sistema");
         p.ver(s.cargarDistancias(matrizDistance), Retorno.Resultado.OK, "Se cargó la matriz de distancias");
 
@@ -148,6 +163,7 @@ public class Main {
         p.ver(s.buscarCamino(matrizDistance, "Montevideo", "Buenos Aires"), Retorno.Resultado.ERROR_2, "La ciudad destino no existe en el sistema");
         p.ver(s.buscarCamino(matrizDistance, "Montevideo", "Montevideo"), Retorno.Resultado.ERROR_3, "Se ingresó un origen y destino iguales");
         p.ver(s.buscarCamino(matrizDistance, "Montevideo", "Lima"), Retorno.Resultado.OK, "Se muestra el camino mas corto de Montevideo a New York");
+        System.out.println(s.buscarCamino(matrizDistance, "Montevideo", "New York").valorString);
 
         //Imprimir Pruebas
         p.imprimirResultadosPrueba();

@@ -4,7 +4,6 @@ import Datos.Cola;
 import Datos.ListaGenerica;
 import Datos.ListaReserva;
 import Datos.ListaServicio;
-import Datos.NodoLista;
 import java.util.Objects;
 
 public class Crucero implements Comparable<Crucero> {
@@ -145,23 +144,17 @@ public class Crucero implements Comparable<Crucero> {
 
         if (!esperas.isEmpty()) {
             int firstHold = (int) esperas.first();
-            this.esperas.delete(firstHold);
+            this.esperas.dequeue(firstHold);
             this.reservas.insert(firstHold);
             this.disponibles--;
         }
     }
 
     //Pre:
-    //Pos: elimina al cliente de la cola de espera
-    public void eliminarEspera(int cliente) {
-        this.esperas.delete(cliente);
-    }
-
-    //Pre:
     //Pos: recorre la lista de servicios e imprime número y nombre
     public void listarServicios() {
         int num = 1;
-            for(Object element:servicios) {
+        for (Object element : servicios) {
             System.out.println(num + " - " + element.toString());
             num++;
         }
@@ -172,7 +165,8 @@ public class Crucero implements Comparable<Crucero> {
     public void listarComentarios() {
         int num = 1;
         for (Object element : comentarios) {
-            System.out.println(num + " - " + element.toString());
+            Comentario c = (Comentario) element;
+            System.out.println(num + " - " + c.getComentario() + " - " + c.getRanking());
             num++;
         }
     }
@@ -181,16 +175,16 @@ public class Crucero implements Comparable<Crucero> {
     //Pos: retorna el crucero con todos sus datos
     @Override
     public String toString() {
-        return this.nombre + ";" +
-                this.ciudad + ";" +
-                this.capacidad + ";" +
-                this.estrellas + ";" +
-                this.ranking + ";" +
-                this.servicios.toString() +  ";" +
-                this.comentarios.toString() +  ";" +
-                this.reservas.toString() +  ";" + 
-                this.esperas.toString() +  ";" +
-                this.disponibles;
+        return this.nombre + ";"
+                + this.ciudad + ";"
+                + this.capacidad + ";"
+                + this.estrellas + ";"
+                + this.ranking + ";"
+                + this.servicios.toString() + ";"
+                + this.comentarios.toString() + ";"
+                + this.reservas.toString() + ";"
+                + this.esperas.toString() + ";"
+                + this.disponibles;
     }
 
     //Pre:

@@ -1,7 +1,6 @@
 package Datos;
 
 import Dominio.Ciudad;
-import Dominio.Crucero;
 
 public class ListaCiudad<T> extends Lista {
 
@@ -75,7 +74,7 @@ public class ListaCiudad<T> extends Lista {
             aux = aux.getNext();
         }
         if (encontrado) {
-            return index;
+            return this.cantElementos - 1 - index;
         } else {
             return -1;
         }
@@ -90,7 +89,7 @@ public class ListaCiudad<T> extends Lista {
         String ciudad = "";
 
         while (aux != null) {
-            if (i == index) {
+            if (i == this.cantElementos - 1 - index) {
                 ciudad = aux.getElement().getNombre();
             }
             i++;

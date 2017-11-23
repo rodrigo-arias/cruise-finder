@@ -1,14 +1,12 @@
 package Datos;
 
-public interface ICola extends Iterable<Object> {
+public interface ICola<T> extends Iterable<T> {
 
     public boolean isEmpty();
 
-    public void insert(Object element);
+    public void enqueue(T element);
 
-    public void delete(Object element);
-
-    public Object find(Object element);
+    public void dequeue(T element);
 
     public void empty();
 

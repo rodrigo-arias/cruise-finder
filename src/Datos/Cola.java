@@ -2,10 +2,10 @@ package Datos;
 
 import java.util.Iterator;
 
-public class Cola implements ICola {
+public class Cola<T> implements ICola<T> {
 
-    protected NodoCola inicio;
-    protected NodoCola fin;
+    protected NodoCola<T> inicio;
+    protected NodoCola<T> fin;
     protected int cantElementos;
 
     //==================  Construct  ==================//
@@ -24,6 +24,10 @@ public class Cola implements ICola {
         this.cantElementos = cantElementos;
     }
 
+    public NodoCola<T> getInicio() {
+        return inicio;
+    }
+
     //================  Métodos Básicos  ===============//
     //Pre:
     //Pos: retorna true si el inicio de la lista es null
@@ -35,9 +39,9 @@ public class Cola implements ICola {
     //Pre:
     //Pos: agrega el elemento al final de la cola
     @Override
-    public void insert(Object element) {
+    public void enqueue(T element) {
 
-        NodoCola nuevo = new NodoCola(element);
+        NodoCola<T> nuevo = new NodoCola<>(element);
 
         if (!this.isEmpty()) {
 
@@ -53,31 +57,11 @@ public class Cola implements ICola {
     //Pre:
     //Pos: borra el elemento del inicio de la cola
     @Override
-    public void delete(Object element) {
+    public void dequeue(T element) {
         if (inicio.getElement().equals(element)) {
             inicio = inicio.getNext();
-
-            if (inicio == null) {
-                fin = null;
-            }
-        } else {
-
-            NodoCola aux = inicio;
-            while (aux.getNext() != null) {
-
-                if (aux.getNext().getElement().equals(element)) {
-                    aux.setNext(aux.getNext().getNext());
-
-                    if (aux.getNext() == null) {
-                        fin = aux;
-                    }
-                    return;
-                } else {
-                    aux = aux.getNext();
-                }
-            }
+            this.cantElementos--;
         }
-        this.cantElementos--;
     }
 
     //Pre:
@@ -92,30 +76,13 @@ public class Cola implements ICola {
     }
 
     //Pre:
-    //Pos: retorna el objecto si lo encuentra en la cola, sino retorna null
-    @Override
-    public Object find(Object element) {
-
-        NodoCola aux = inicio;
-
-        while (aux != null) {
-            if (aux.getElement().equals(element)) {
-                return aux.getElement();
-            } else {
-                aux = aux.getNext();
-            }
-        }
-        return aux;
-    }
-
-    //Pre:
     //Pos: recorre los elementos e imprime sus datos
     @Override
     public void show() {
         if (this.isEmpty()) {
             System.out.println("La cola está vacía");
         } else {
-            NodoCola aux = this.inicio;
+            NodoCola<T> aux = this.inicio;
             System.out.print("Cola de espera en el crucero ");
 
             while (aux != null) {
@@ -135,25 +102,25 @@ public class Cola implements ICola {
         return this.inicio.getElement();
     }
 
-    public Iterator<Object> iterator() {
-        return new Iterator<Object>() {
-            private NodoCola aux = inicio;
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private NodoCola<T> aux = inicio;
 
             public boolean hasNext() {
                 return aux != null;
             }
 
-            public Object next() {
-                Object actual = aux.getElement();
+            public T next() {
+                T actual = aux.getElement();
                 aux = aux.getNext();
                 return actual;
             }
         };
     }
-    
-        public String toString() {
+
+    public String toString() {
         String ret = "";
-        for (Object element : this) {
+        for (T element : this) {
             if (this.fin.getElement().toString().compareTo(element.toString()) == 0) {
                 ret += element.toString();
             } else {

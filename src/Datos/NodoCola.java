@@ -1,35 +1,35 @@
 package Datos;
 
-public class NodoCola {
+public class NodoCola<T> {
 
-    private Object element;
+    private T element;
     private NodoCola next;
 
     //==================  Construct  ==================//
-    public NodoCola(Object element, NodoCola next) {
+    public NodoCola(T element, NodoCola<T> next) {
         this.element = element;
         this.next = next;
     }
 
-    public NodoCola(Object element) {
+    public NodoCola(T element) {
         this.element = element;
         this.next = null;
     }
 
     //==================  Properties  ==================//
-    public Object getElement() {
+    public T getElement() {
         return element;
     }
 
-    public void setElement(Object element) {
+    public void setElement(T element) {
         this.element = element;
     }
 
-    public NodoCola getNext() {
+    public NodoCola<T> getNext() {
         return next;
     }
 
-    public void setNext(NodoCola next) {
+    public void setNext(NodoCola<T> next) {
         this.next = next;
     }
 }

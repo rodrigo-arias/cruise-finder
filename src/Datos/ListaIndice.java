@@ -44,4 +44,49 @@ public class ListaIndice<T> extends Lista {
         }
         this.cantElementos++;
     }
+
+    public String toString(NodoLista aux) {
+        if (aux == null) {
+            return "";
+        }
+        Crucero c = (Crucero) aux.getElement();
+
+        if (aux.getNext() == null) {
+            return toString(aux.getNext()) + c.toString();
+        } else {
+            return toString(aux.getNext()) + "|" + c.toString();
+        }
+
+    }
+
+    public String toStringAsc(String ciudad) {
+        String ret = "";
+        for (Object element : this) {
+            Crucero c = (Crucero) element;
+            if (c.getCiudad() == ciudad) {
+                if (fin.getElement().toString().compareTo(element.toString()) == 0) {
+                    ret += element.toString();
+                } else {
+                    ret += element.toString() + "|";
+                }
+            }
+        }
+        return ret;
+    }
+
+    public String toStringDesc(NodoLista aux, String ciudad) {
+        if (aux == null) {
+            return "";
+        }
+        Crucero c = (Crucero) aux.getElement();
+        if (c.getCiudad() == ciudad) {
+            if (aux.getNext() == null) {
+                return toStringDesc(aux.getNext(), ciudad) + c.toString();
+            } else {
+                return toStringDesc(aux.getNext(), ciudad) + "|" + c.toString();
+            }
+        } else {
+            return toStringDesc(aux.getNext(), ciudad);
+        }
+    }
 }

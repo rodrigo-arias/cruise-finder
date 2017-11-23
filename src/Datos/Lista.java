@@ -46,7 +46,6 @@ public abstract class Lista<T> implements ILista<T> {
     public void insert(T element) {
 
         NodoLista<T> nuevo = new NodoLista<>(element);
-
         nuevo.setNext(inicio);
 
         this.inicio = nuevo;
@@ -54,7 +53,6 @@ public abstract class Lista<T> implements ILista<T> {
         if (this.fin == null) {
             this.fin = nuevo;
         }
-
         this.cantElementos++;
     }
 
@@ -128,7 +126,7 @@ public abstract class Lista<T> implements ILista<T> {
 
     public String toString() {
         String ret = "";
-        for (Object element : this) {
+        for (T element : this) {
             if (this.fin.getElement().toString().compareTo(element.toString()) == 0) {
                 ret += element.toString();
             } else {

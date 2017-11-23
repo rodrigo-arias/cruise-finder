@@ -43,7 +43,7 @@ public class Ciudad {
     }
 
     //Pre:
-    //Pos: imprime el nombre de la ciudad
+    //Pos: imprime el nombre de la ciudad y todo los datos de sus cruceros
     @Override
     public String toString() {
         return this.nombre + "|" + this.cruceros.toString();
@@ -78,19 +78,5 @@ public class Ciudad {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.nombre);
         return hash;
-    }
-    
-    //Pre:
-    //Pos: recorre la lista de cruceros y retorna un string separado por |
-    public String retornarCruceros() {
-        String ret = "";
-        for(Object element:cruceros) {
-            if(cruceros.getFin().getElement().toString().compareTo(element.toString()) == 0) {
-                ret += element.toString();
-            } else {
-                ret += element.toString() + "|";
-            }
-        }
-        return ret;
     }
 }

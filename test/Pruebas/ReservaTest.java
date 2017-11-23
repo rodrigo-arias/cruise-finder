@@ -103,25 +103,6 @@ public class ReservaTest {
         cruisefound.getEsperas().show();
         System.out.println();
     }
-
-    @Test
-    public void cancelarReservaClienteColaEspera() {
-        s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3);
-        s.realizarReserva(1, "Montevideo", "Royal Caribbean Int.");
-        s.realizarReserva(2, "Montevideo", "Royal Caribbean Int.");
-        s.realizarReserva(3, "Montevideo", "Royal Caribbean Int.");
-        s.realizarReserva(4, "Montevideo", "Royal Caribbean Int.");
-        s.realizarReserva(5, "Montevideo", "Royal Caribbean Int.");
-
-        assertEquals(Retorno.Resultado.OK, s.cancelarReserva(4, "Montevideo", "Royal Caribbean Int.").resultado);
-
-        Ciudad citytemp = new Ciudad("Montevideo");
-        Ciudad cityfound = s.ciudades.find(citytemp);
-        Crucero cruisetemp = new Crucero("Royal Caribbean Int.", "Montevideo");
-        Crucero cruisefound = cityfound.getCruceros().find(cruisetemp);
-        System.out.println("Se borra de cola de espera");
-        cruisefound.getReservas().show();
-        cruisefound.getEsperas().show();
-        System.out.println();
-    }
+    /* ya que la letra infiere que la estructura de las esperas se corresponde con una cola */
+ /* no es posible cancelar la reserva de un cliente que se encuentra en cola de espera.  */
 }

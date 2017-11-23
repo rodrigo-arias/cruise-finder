@@ -33,6 +33,6 @@ public class Comentario {
     //Pos: imprime el comentario y su ranking
     @Override
     public String toString() {
-        return this.comentario + " - " + this.ranking;
+        return this.comentario + ";" + this.ranking;
     }
 }

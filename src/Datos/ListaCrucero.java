@@ -58,4 +58,18 @@ public class ListaCrucero<T> extends Lista {
         }
         this.cantElementos++;
     }
+
+    @Override
+    public String toString() {
+        String ret = "";
+        for (Object element : this) {
+            Crucero c = (Crucero) element;
+            if (fin.getElement().toString().compareTo(element.toString()) == 0) {
+                ret += element.toString();
+            } else {
+                ret += element.toString() + "|";
+            }
+        }
+        return ret;
+    }
 }
