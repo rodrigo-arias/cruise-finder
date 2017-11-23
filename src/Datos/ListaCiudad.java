@@ -97,4 +97,18 @@ public class ListaCiudad<T> extends Lista {
         }
         return ciudad;
     }
+
+    @Override
+    public String toString() {
+        String ret = "";
+        for (Object element : this) {
+            Ciudad c = (Ciudad) element;
+            if (fin.getElement().toString().compareTo(element.toString()) == 0) {
+                ret += c.getNombre();
+            } else {
+                ret += c.getNombre() + "|";
+            }
+        }
+        return ret;
+    }
 }

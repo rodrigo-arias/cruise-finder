@@ -22,6 +22,7 @@ public class CiudadTest {
     @Test
     public void registrarCiudad() {
         assertEquals(Retorno.Resultado.OK, s.registrarCiudad("Montevideo").resultado);
+        System.out.println(s.ciudades.toString());
     }
 
     @Test
@@ -39,5 +40,7 @@ public class CiudadTest {
         s.registrarCiudad("Panamá");
         s.registrarCiudad("New York");
         assertEquals(Retorno.Resultado.ERROR_2, s.registrarCiudad("Buenos Aires").resultado);
+        System.out.println();
+        System.out.println(s.ciudades.toString());
     }
 }

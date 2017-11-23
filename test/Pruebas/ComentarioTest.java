@@ -17,30 +17,38 @@ public class ComentarioTest {
         s = new Sistema();
         u = new Utilidad();
         s.crearSistemaReservas(6);
+        s.registrarCiudad("Santiago");
+        s.registrarCrucero("Santiago", "Royal Caribbean Int.", 4, 2000);
+        s.registrarCrucero("Santiago", "Disney Cruise Line", 5, 2200);
+        s.registrarCrucero("Santiago", "Carnival Cruise Lines", 3, 1800);
     }
 
     @Test
-    public void registrarCiudad() {
-        assertEquals(Retorno.Resultado.OK, s.registrarCiudad("Montevideo").resultado);
+    public void registrarComentario() {
+        assertEquals(Retorno.Resultado.OK, s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Me gusto", 4).resultado);
+    }
+
+    @Test
+    public void registrarComentarioErrorRanking() {
+        assertEquals(Retorno.Resultado.ERROR_1, s.ingresarComentario("Santiago", "Royal Caribbean Int.", "No me gusto nada", -1).resultado);
+    }
+
+    @Test
+    public void registrarComentarioErrorCrucero() {
+        assertEquals(Retorno.Resultado.ERROR_2, s.ingresarComentario("Santiago", "Costa Concordia", "El crucero está muy bueno", 4).resultado);
+    }
+
+    @Test
+    public void registrarComentarioErrorCiudad() {
+        assertEquals(Retorno.Resultado.ERROR_3, s.ingresarComentario("Asunción", "Royal Caribbean Int.", "Se pueden mejorar algunas cosas", 3).resultado);
+    }
+
+    @Test
+    public void listarComentarios() {
+        s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Me gusto", 4);
+        s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Tienen que mejorar la limpieza", 2);
+        s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Excelente", 5);
+        assertEquals(Retorno.Resultado.OK, s.listarComentarios("Santiago", "Royal Caribbean Int.").resultado);
+
     }
 }
-
-/*
-
-p.ver(s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Me gusto", 4), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Me gusto", 4), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Disney Cruise Line", "Tienen que mejorar la limpieza", 2), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Carnival Cruise Lines", "Excelente", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Carnival Cruise Lines de Santiago");
-p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "No me gusto nada", -1), Retorno.Resultado.ERROR_1, "El ranking del comentario no está entre 0 y 5");
-p.ver(s.ingresarComentario("Montevideo", "Disney Cruise Line", "El crucero está muy bueno", 4), Retorno.Resultado.ERROR_2, "No se encontró un crucero con ese nombre para Montevideo");
-p.ver(s.ingresarComentario("Asunción", "Royal Caribbean Int.", "Se pueden mejorar algunas cosas", 3), Retorno.Resultado.ERROR_3, "No se encontró la ciudad Asunción");
-s.listarCrucerosRanking();
-
-p.ver(s.ingresarComentario("Santiago", "Royal Caribbean Int.", "No me gustó", 2), Retorno.Resultado.OK, "Se ingresó un comentario en el Royal Caribbean Int. de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Disney Cruise Line", "Me encantó", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Disney Cruise Line", "Me encantó", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Disney Cruise Line", "Me encantó", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-p.ver(s.ingresarComentario("Santiago", "Disney Cruise Line", "Me encantó", 5), Retorno.Resultado.OK, "Se ingresó un comentario en el Disney Cruise Line de Santiago");
-s.listarCrucerosRanking();
-
- */
