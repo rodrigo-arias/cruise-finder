@@ -73,6 +73,7 @@ public class Sistema implements ISistema {
                 ret.resultado = Resultado.ERROR_1;
             }
         } else {
+            /* se agregó ERROR 2: sobrepasa el límite de ciudades soportadas por el sistema */
             ret.resultado = Resultado.ERROR_2;
         }
         return ret;
@@ -94,6 +95,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
         } else {
             if (cityfound == null) {
+                /* se controla primero el ERROR 4 (existencia de la ciudad), luego el ERROR 3 (existencia del crucero) */
                 ret.resultado = Resultado.ERROR_4;
             } else {
 
@@ -140,6 +142,7 @@ public class Sistema implements ISistema {
             }
 
         } else {
+            /* se controla primero el ERROR 2 (existencia de la ciudad), luego el ERROR 1 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_2;
         }
         return ret;
@@ -175,6 +178,7 @@ public class Sistema implements ISistema {
             }
 
         } else {
+            /* se controla primero el ERROR 3 (existencia de la ciudad), luego el ERROR 1 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_3;
         }
         return ret;
@@ -213,6 +217,7 @@ public class Sistema implements ISistema {
             }
 
         } else {
+            /* se controla primero el ERROR 2 (existencia de la ciudad), luego el ERROR 1 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_2;
         }
 
@@ -249,6 +254,7 @@ public class Sistema implements ISistema {
                 ret.resultado = Retorno.Resultado.ERROR_1;
             }
         } else {
+            /* se controla primero el ERROR 3 (existencia de la ciudad), luego el ERROR 1 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_3;
         }
         return ret;
@@ -285,6 +291,7 @@ public class Sistema implements ISistema {
                 ret.resultado = Retorno.Resultado.ERROR_2;
             }
         } else {
+            /* se controla primero el ERROR 3 (existencia de la ciudad), luego el ERROR 2 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_3;
         }
         return ret;
@@ -321,6 +328,7 @@ public class Sistema implements ISistema {
             }
 
         } else {
+            /* se controla primero el ERROR 2 (existencia de la ciudad), luego el ERROR 1 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_2;
         }
         return ret;
@@ -456,6 +464,7 @@ public class Sistema implements ISistema {
                 ret.resultado = Retorno.Resultado.ERROR_1;
             }
         } else {
+            /* se controla primero el ERROR 2 (existencia de la ciudad), luego el ERROR 1 (existencia del crucero) */
             ret.resultado = Retorno.Resultado.ERROR_2;
         }
         return ret;
@@ -472,6 +481,7 @@ public class Sistema implements ISistema {
             int[][] matriz = new int[ciudades[0].length][ciudades.length];
             ret.resultado = Resultado.OK;
         } else {
+            /* se agregó ERROR 2: la matriz ciudades sobrepasa el límite de ciudades soportadas por el sistema */
             ret.resultado = Resultado.ERROR_1;
         }
         return ret;
@@ -488,13 +498,16 @@ public class Sistema implements ISistema {
         int d = ciudades.findIndex(destino);
 
         if (o == -1) {
+            /* se agregó ERROR 1: la ciudad origen no está registrada en el sistema */
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La ciudad origen no existe en el sistema";
 
         } else if (d == -1) {
+            /* se agregó ERROR 2: la ciudad destino no está registrada en el sistema */
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "La ciudad destino no existe en el sistema";
         } else if (o == d) {
+            /* se agregó ERROR 3: se intenta búscar la misma ciudad origen y destino */
             ret.resultado = Resultado.ERROR_3;
             ret.valorString = "Ingrese una ciudad origen y destino distintas";
         } else {

@@ -53,5 +53,22 @@ public class CruceroTest {
         s.registrarCrucero("Santiago", "Disney Cruise Line", 5, 2200);
         s.registrarCrucero("Santiago", "Carnival Cruise Lines", 3, 1800);
         assertEquals(Retorno.Resultado.OK, s.listarCrucerosCiudad("Santiago").resultado);
+        System.out.println();
+    }
+
+    @Test
+    public void listarCrucerosCiudadRankingAscDesc() {
+        s.registrarCrucero("Santiago", "Royal Caribbean Int.", 4, 2000);
+        s.ingresarComentario("Santiago", "Royal Caribbean Int.", "Me gusto", 4);
+        s.registrarCrucero("Santiago", "Disney Cruise Line", 5, 2200);
+        s.ingresarComentario("Santiago", "Disney Cruise Line", "Muy mala limpieza", 1);
+        s.registrarCrucero("Santiago", "Costa Concordia", 3, 1100);
+        s.ingresarComentario("Santiago", "Costa Concordia", "Excelente", 5);
+        s.registrarCrucero("Santiago", "Carnival Cruise Lines", 3, 1800);
+        s.ingresarComentario("Santiago", "Carnival Cruise Lines", "Aceptable", 3);
+        assertEquals(Retorno.Resultado.OK, s.listarCrucerosRankingAsc("Santiago").resultado);
+        System.out.println();
+        assertEquals(Retorno.Resultado.OK, s.listarCrucerosRankingDesc("Santiago").resultado);
+        System.out.println();
     }
 }
