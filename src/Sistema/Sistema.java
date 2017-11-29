@@ -22,10 +22,10 @@ public class Sistema implements ISistema {
 
         Retorno ret = new Retorno();
 
-        ciudades = new ListaCiudad<>();
-        indices = new ListaIndice<>();
-
         if (cantCiudades >= 0) {
+            ciudades = new ListaCiudad<>();
+            indices = new ListaIndice<>();
+
             ciudades.setCantMaxima(cantCiudades);
             limite = cantCiudades;
             ret.resultado = Resultado.OK;

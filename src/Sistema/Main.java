@@ -153,8 +153,8 @@ public class Main {
             {0, 0, 40, 45, 25, 0}};
 
         /* nota: la matriz debe cargarse en el orden de registro de las ciudades */
-        p.ver(s.cargarDistancias(matrizError), Retorno.Resultado.ERROR_1, "La dimensión de la matriz no coincide con la cantidad de ciudades del sistema");
-        p.ver(s.cargarDistancias(matrizDistance), Retorno.Resultado.OK, "Se cargó la matriz de distancias");
+        p.ver(s.cargarDistancias(matrizError), Retorno.Resultado.ERROR_1, "La dimensión de la matriz supera la cantidad de ciudades del sistema");
+        p.ver(s.cargarDistancias(matrizDistance), Retorno.Resultado.OK, "Se validó la matriz de distancias");
 
         //2.2.Camino más corto
         p.ver(s.buscarCamino(matrizDistance, "Montevideo", "New York"), Retorno.Resultado.OK, "Se muestra el camino mas corto de Montevideo a New York");
@@ -168,4 +168,5 @@ public class Main {
         //Imprimir Pruebas
         p.imprimirResultadosPrueba();
     }
+
 }

@@ -111,4 +111,25 @@ public class ListaCiudad<T> extends Lista {
         }
         return ret;
     }
+
+    /* Defensa: listar las ciudad con mayor cantidad de cruceros */
+    public String mayorCantidadCruceros() {
+
+        int cant = 0;
+        String ciudad = "";
+        NodoLista<Ciudad> aux = this.inicio;
+
+        while (aux != null) {
+            if (aux.getElement().getCruceros().cantElementos > cant) {
+                cant = aux.getElement().getCruceros().cantElementos;
+                ciudad = aux.getElement().getNombre();
+            }
+            aux = aux.getNext();
+        }
+        if (cant == 0) {
+            return "No hay ciudades con cruceros registrados.";
+        } else {
+            return "La ciudad con mas cruceros registrados es " + ciudad + " con " + cant + " cruceros.";
+        }
+    }
 }

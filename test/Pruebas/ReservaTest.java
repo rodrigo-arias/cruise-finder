@@ -104,5 +104,5 @@ public class ReservaTest {
         System.out.println();
     }
     /* ya que la letra infiere que la estructura de las esperas se corresponde con una cola */
- /* no es posible cancelar la reserva de un cliente que se encuentra en cola de espera.  */
+ /* no es posible cancelar la reserva de un cliente que se encuentra en cola de espera. */
 }
